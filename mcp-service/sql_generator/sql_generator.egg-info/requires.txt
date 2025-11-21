@@ -1,0 +1,8 @@
+jinja2>=3.0.0
+pyyaml>=6.0
+
+[mysql]
+pymysql>=1.0.0
+
+[postgresql]
+psycopg2-binary>=2.9.0

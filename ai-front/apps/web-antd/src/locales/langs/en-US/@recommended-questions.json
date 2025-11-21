@@ -1,0 +1,19 @@
+{
+  "title": "Recommended Questions",
+  "addQuestion": "Add Recommended Question",
+  "questionTitle": "Title",
+  "content": "Content",
+  "contentPlaceholder": "Please enter recommended question content",
+  "roles": "Roles",
+  "associatedRoles": "Associated Roles",
+  "sortOrder": "Sort Order",
+  "isDefault": "Default",
+  "isDefaultQuestion": "Default Question",
+  "yes": "Yes",
+  "no": "No",
+  "notSet": "Not Set",
+  "normal": "Normal",
+  "disabled": "Disabled",
+  "editTitle": "Edit Recommended Question",
+  "createTitle": "Add Recommended Question"
+}

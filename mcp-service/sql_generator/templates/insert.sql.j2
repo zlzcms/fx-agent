@@ -1,0 +1,32 @@
+{#- INSERT template with support for PostgreSQL and MySQL -#}
+INSERT INTO {% if database is defined %}{{ database }}.{% endif %}{{ table }}
+(
+{% for column in columns %}    {{ column }}{% if not loop.last %},{% endif %}
+
+{% endfor %})
+VALUES
+{% for row in values %}(
+{% for value in row %}    {{ value }}{% if not loop.last %},{% endif %}
+
+{% endfor %}){% if not loop.last %},{% endif %}
+{% endfor %}
+
+{% if upsert is defined and upsert %}
+{% if dialect == 'postgresql' %}
+ON CONFLICT ({% for column in upsert.unique_columns %}{{ column }}{% if not loop.last %}, {% endif %}{% endfor %})
+DO UPDATE SET
+{% for column in upsert.update_columns %}
+    {{ column }} = EXCLUDED.{{ column }}{% if not loop.last %},{% endif %}
+{% endfor %}
+{% else %}
+{# MySQL syntax #}
+ON DUPLICATE KEY UPDATE
+{% for column in upsert.update_columns %}
+    {{ column }} = VALUES({{ column }}){% if not loop.last %},{% endif %}
+{% endfor %}
+{% endif %}
+{% endif %}
+
+{% if returning is defined and returning and dialect == 'postgresql' %}
+RETURNING {% for column in returning %}{{ column }}{% if not loop.last %}, {% endif %}{% endfor %}
+{% endif %}

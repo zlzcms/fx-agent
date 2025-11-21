@@ -1,0 +1,56 @@
+{
+  "type": "select",
+  "table": "products",
+  "table_alias": "p",
+  "columns": [
+    "p.id",
+    "p.name",
+    "p.price",
+    "c.name as category_name",
+    {
+      "expr": "COUNT(r.id)",
+      "alias": "review_count"
+    },
+    {
+      "expr": "AVG(r.rating)",
+      "alias": "average_rating"
+    }
+  ],
+  "joins": [
+    {
+      "type": "INNER",
+      "table": "categories",
+      "alias": "c",
+      "condition": "p.category_id = c.id"
+    },
+    {
+      "type": "LEFT",
+      "table": "reviews",
+      "alias": "r",
+      "condition": "p.id = r.product_id"
+    }
+  ],
+  "where": "p.price > 100 AND p.active = TRUE AND c.active = TRUE",
+  "group_by": [
+    "p.id",
+    "p.name",
+    "p.price",
+    "c.name"
+  ],
+  "having": "COUNT(r.id) > 5",
+  "order_by": [
+    {
+      "column": "average_rating",
+      "direction": "DESC"
+    },
+    {
+      "column": "p.name",
+      "direction": "ASC"
+    }
+  ],
+  "limit": 20,
+  "offset": 0,
+  "with_clauses": {
+    "top_categories": "SELECT id, name FROM categories WHERE featured = TRUE ORDER BY priority DESC LIMIT 5"
+  }
+}

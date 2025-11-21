@@ -1,0 +1,443 @@
+/**
+ * @Author: zhujinlong
+ * @Date:   2025-06-27 11:16:44
+ * @Last Modified by:   zhujinlong
+ * @Last Modified time: 2025-07-07 15:14:48
+ */
+:deep(.ant-tabs-card .ant-tabs-tab) {
+  border-radius: 6px 6px 0 0;
+}
+
+:deep(.fixed-label-width-10 label) {
+  flex-shrink: 0 !important;
+  width: 10px !important;
+  min-width: 10px !important;
+}
+
+/* 标签页内容区域最小高度 */
+:deep(.ant-tabs-content-holder) {
+  min-height: 500px;
+}
+
+:deep(.ant-tabs-tabpane) {
+  min-height: 500px;
+}
+
+/* 表单标签宽度控制 - 使用更通用的选择器 */
+:deep(.vben-form label) {
+  flex-shrink: 0 !important;
+  width: 120px !important;
+  min-width: 120px !important;
+}
+
+/* 水平布局时的标签右对齐 */
+:deep(.vben-form .flex-row label) {
+  padding-right: 12px !important;
+  text-align: right !important;
+}
+
+/* 上传组件样式优化 */
+:deep(.ant-upload-select-picture-card) {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+}
+
+:deep(.ant-upload-list-picture-card .ant-upload-list-item) {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+}
+
+:deep(.ant-upload-list-picture-card .ant-upload-list-item-thumbnail img) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* 当有图片上传后隐藏上传按钮 */
+:deep(
+  .ant-upload-list-picture-card:has(.ant-upload-list-item:not(.ant-upload-list-item-error))
+    .ant-upload-select-picture-card
+) {
+  display: none !important;
+}
+
+/* 兼容性方案：当上传列表有内容时隐藏上传按钮 */
+:deep(
+  .ant-upload-picture-card-wrapper
+    .ant-upload-list-picture-card
+    .ant-upload-list-item
+    ~ .ant-upload-select-picture-card
+) {
+  display: none !important;
+}
+
+/* 确保maxCount为1时，有图片后隐藏上传区域 */
+:deep(
+  .ant-upload-picture-card-wrapper:has(.ant-upload-list-item-done) .ant-upload-select-picture-card
+) {
+  display: none !important;
+}
+
+/* 更直接的方案：当上传列表有文件时隐藏上传按钮 */
+:deep(
+  .ant-upload-picture-card-wrapper
+    .ant-upload-list-picture-card:not(:empty)
+    ~ .ant-upload-select-picture-card
+) {
+  display: none !important;
+}
+
+/* 当文件列表不为空时隐藏上传按钮的通用方案 */
+:deep(.ant-upload-wrapper .ant-upload-list:not(:empty) ~ .ant-upload-select) {
+  display: none !important;
+}
+
+/* 表单项间距优化 */
+:deep(.vben-form .ant-form-item) {
+  margin-bottom: 24px;
+}
+
+/* 开关组件对齐 */
+:deep(.ant-switch) {
+  margin-top: 4px;
+}
+
+/* 数据源详情显示区域样式 */
+:deep(.datasource-details) {
+  background: #fafafa;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+:deep(.datasource-item) {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+:deep(.datasource-item:hover) {
+  border-color: #d1d5db;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 5%);
+}
+
+/* 表格项扩展样式 */
+:deep(.table-item-expanded) {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+:deep(.table-item-expanded:hover) {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 5%);
+}
+
+/* 字段项样式 */
+:deep(.field-item) {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+:deep(.field-item:hover) {
+  border-color: #d1d5db;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+}
+
+/* 字段选中状态样式 */
+:deep(.field-item.field-selected) {
+  border-color: #10b981 !important;
+  border-width: 1px !important;
+  box-shadow: 0 0 0 1px rgb(16 185 129 / 10%) !important;
+}
+
+:deep(.field-item.field-selected:hover) {
+  border-color: #059669 !important;
+  box-shadow: 0 0 0 1px rgb(16 185 129 / 20%) !important;
+}
+
+/* 字段类型标签样式 */
+:deep(.field-item .text-blue-600) {
+  font-family: Monaco, Menlo, 'Ubuntu Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* 必填标识样式 */
+:deep(.field-item .text-red-500) {
+  font-weight: 600;
+}
+
+/* 点击提示样式 */
+:deep(.table-item-expanded .cursor-pointer:hover) {
+  background: rgb(59 130 246 / 5%);
+  border-radius: 4px;
+}
+
+/* 数据限制输入框样式 */
+:deep(.table-item-expanded input[type='number']) {
+  transition: all 0.2s ease;
+}
+
+:deep(.table-item-expanded input[type='number']:hover) {
+  border-color: #9ca3af;
+}
+
+:deep(.table-item-expanded input[type='number']:focus) {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 1px rgb(59 130 246 / 10%) !important;
+}
+
+/* 数据限制区域样式 */
+:deep(.table-item-expanded .border-t:last-child) {
+  padding: 12px;
+  margin: 12px -12px -12px;
+  background: rgb(249 250 251 / 50%);
+  border-radius: 0 0 6px 6px;
+}
+
+/* 输出方式选择卡片样式 */
+.output-format-card {
+  overflow: hidden;
+  border-width: 1px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.output-format-card:hover {
+  box-shadow: 0 4px 6px rgb(0 0 0 / 5%);
+  transform: translateY(-2px);
+}
+
+.output-format-card.active {
+  background-color: rgb(59 130 246 / 5%) !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 1px rgb(59 130 246 / 10%) !important;
+}
+
+/* 隐藏输出方式字段 */
+:deep(.hidden-field) {
+  display: none !important;
+}
+
+/* 隐藏输出方式标签 */
+:deep(.vben-form .output-format-field label) {
+  display: none !important;
+}
+
+/* TableFieldConfig组件样式优化 - 去除左侧空白 */
+:deep(.table-field-config-wrapper) {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+:deep(.table-field-config-wrapper .ant-form-item-label) {
+  display: none !important;
+}
+
+:deep(.table-field-config-wrapper .ant-form-item-control) {
+  max-width: 100% !important;
+  margin-left: 0 !important;
+}
+
+:deep(.table-field-config-wrapper .ant-form-item-control-input) {
+  min-height: auto !important;
+}
+
+/* 调整输出方式Radio按钮样式 */
+:deep(.vben-form .output-format-field .ant-radio-group) {
+  width: 100%;
+}
+
+:deep(.vben-form .output-format-field .ant-radio-button-wrapper) {
+  display: flex;
+  align-items: flex-start;
+  width: calc(50% - 8px);
+  height: auto;
+  padding: 16px;
+  margin-right: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+:deep(.vben-form .output-format-field .ant-radio-button-wrapper:last-child) {
+  margin-right: 0;
+}
+
+:deep(.vben-form .output-format-field .ant-radio-button-wrapper-checked) {
+  background-color: rgb(59 130 246 / 5%) !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 1px rgb(59 130 246 / 10%) !important;
+}
+
+/* AI润色按钮特殊样式 */
+.ai-polish-btn {
+  color: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.ai-polish-btn:hover {
+  box-shadow: 0 4px 12px rgb(102 126 234 / 40%);
+  transform: translateY(-1px);
+}
+
+.ai-polish-btn:active {
+  transform: translateY(0);
+}
+
+/* 模型定义区域样式优化 */
+.model-definition-area {
+  background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+  border: 1px solid #e1e8ff;
+}
+
+.model-definition-textarea {
+  background: rgb(255 255 255 / 90%);
+  backdrop-filter: blur(10px);
+}
+
+/* 模拟测试模态框样式 */
+.training-steps-container {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+/* 步骤项动画效果 */
+.step-item {
+  transform: translateY(0);
+  transition: all 0.3s ease;
+}
+
+.step-item:hover:not(.opacity-50) {
+  box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+  transform: translateY(-1px);
+}
+
+/* 状态指示器动画 */
+.step-item .animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 步骤详情展开动画 */
+.step-item .border-t {
+  animation: fade-in-down 0.3s ease;
+}
+
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 不同状态的边框加强效果 */
+.step-item.border-blue-300 {
+  border-width: 2px;
+  box-shadow: 0 0 0 1px rgb(59 130 246 / 10%);
+}
+
+.step-item.border-green-300 {
+  border-width: 2px;
+  box-shadow: 0 0 0 1px rgb(34 197 94 / 10%);
+}
+
+.step-item.border-red-300 {
+  border-width: 2px;
+  box-shadow: 0 0 0 1px rgb(239 68 68 / 10%);
+}
+
+/* 模态框内容区域样式 */
+:deep(.ant-modal-content) {
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+:deep(.ant-modal-header) {
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-bottom: none;
+}
+
+:deep(.ant-modal-title) {
+  font-weight: 600;
+  color: white;
+}
+
+:deep(.ant-modal-close) {
+  color: white;
+  opacity: 0.8;
+}
+
+:deep(.ant-modal-close:hover) {
+  color: white;
+  opacity: 1;
+}
+
+:deep(.ant-modal-body) {
+  padding: 24px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .training-steps-container {
+    max-height: 500px;
+  }
+
+  .step-item .grid-cols-2 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* 关联字段选择框样式 */
+.relation-select {
+  width: 100%;
+  padding: 6px 10px;
+  padding-right: 2.5rem;
+  appearance: none;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1.5em 1.5em;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.relation-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 1px rgb(59 130 246 / 10%);
+}
+
+.relation-select:disabled {
+  cursor: not-allowed;
+  background-color: #f3f4f6;
+  opacity: 0.7;
+}

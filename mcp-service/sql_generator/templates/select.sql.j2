@@ -1,0 +1,49 @@
+SELECT
+{%- if columns %}
+    {% for col in columns %}
+        {%- if col is string %}
+            {{ col }}
+        {%- else %}
+            {{ col.expr }} AS {{ col.alias }}
+        {%- endif %}
+        {%- if not loop.last %}, {% endif %}
+    {% endfor %}
+{%- else %}
+    *
+{%- endif %}
+FROM {{ table }}
+{%- if where %}
+
+WHERE {{ where }}
+{%- endif %}
+{%- if group_by %}
+
+GROUP BY
+    {%- for col in group_by %}
+        {{ col }}{% if not loop.last %}, {% endif %}
+    {%- endfor %}
+{%- endif %}
+{%- if having %}
+
+HAVING {{ having }}
+{%- endif %}
+{%- if order_by %}
+
+ORDER BY
+    {%- for order in order_by %}
+        {%- if order is mapping %}
+            {{ order.column }} {{ order.direction }}
+        {%- else %}
+            {{ order }}
+        {%- endif %}
+        {%- if not loop.last %}, {% endif %}
+    {%- endfor %}
+{%- endif %}
+{%- if limit is defined %}
+
+LIMIT {{ limit }}
+{%- endif %}
+{%- if offset is defined %}
+
+OFFSET {{ offset }}
+{%- endif %}

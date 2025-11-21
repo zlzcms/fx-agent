@@ -1,0 +1,71 @@
+{
+  "type": "select",
+  "distinct": true,
+  "columns": [
+    {
+      "expr": "u.id",
+      "alias": "user_id"
+    },
+    {
+      "expr": "u.name",
+      "alias": "user_name"
+    },
+    {
+      "expr": "u.email"
+    },
+    {
+      "expr": "COUNT(o.id)",
+      "alias": "order_count"
+    }
+  ],
+  "table": "users",
+  "table_alias": "u",
+  "database": "mydb",
+  "joins": [
+    {
+      "table": "orders",
+      "alias": "o",
+      "condition": "u.id = o.user_id",
+      "type": "LEFT"
+    }
+  ],
+  "condition_groups": {
+    "user_filter": [
+      {
+        "condition": "u.status = :status",
+        "params": {
+          "status": "active"
+        }
+      },
+      {
+        "condition": "u.created_at >= :created_after",
+        "params": {
+          "created_after": "2023-01-01"
+        },
+        "operator": "AND"
+      }
+    ],
+    "order_filter": [
+      {
+        "condition": "o.total > :min_total",
+        "params": {
+          "min_total": 100
+        }
+      }
+    ]
+  },
+  "group_by": ["u.id", "u.name", "u.email"],
+  "having": "COUNT(o.id) > 0",
+  "order_by": [
+    {
+      "column": "order_count",
+      "direction": "DESC"
+    },
+    {
+      "column": "u.name",
+      "direction": "ASC"
+    }
+  ],
+  "limit": 10,
+  "offset": 0
+}

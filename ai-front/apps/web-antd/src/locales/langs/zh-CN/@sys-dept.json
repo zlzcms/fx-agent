@@ -1,0 +1,21 @@
+{
+  "addDept": "新增部门",
+  "editDept": "编辑部门",
+  "createDept": "创建部门",
+  "deptName": "部门名称",
+  "name": "名称",
+  "leader": "负责人",
+  "phone": "手机号码",
+  "phoneNumber": "手机号码",
+  "email": "邮箱",
+  "emailAddress": "邮箱地址",
+  "sort": "排序",
+  "status": "状态",
+  "parentDept": "父级部门",
+  "addSubDept": "新增下级",
+  "expandAll": "展开全部",
+  "collapseAll": "折叠全部",
+  "normal": "正常",
+  "stopped": "停用",
+  "invalidEmail": "无效的邮箱地址"
+}

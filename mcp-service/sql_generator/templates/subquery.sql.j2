@@ -1,0 +1,46 @@
+{#- Subquery template with support for PostgreSQL and MySQL -#}
+(
+    SELECT
+    {% if distinct is defined and distinct %}DISTINCT {% endif %}
+    {% if columns is defined and columns %}
+    {% for column in columns %}
+    {% if column is mapping %}
+    {{ column.expr }}{% if column.alias is defined %} AS {{ column.alias }}{% endif %}{% else %}{{ column }}{% endif %}{% if not loop.last %},
+    {% endif %}
+    {% endfor %}
+    {% else %}*{% endif %}
+
+    FROM {{ table }}{% if table_alias is defined and table_alias %} AS {{ table_alias }}{% endif %}
+
+    {% if joins is defined and joins %}
+    {% for join in joins %}
+    {{ join.type | default('INNER') }} JOIN {{ join.table }}{% if join.alias is defined %} AS {{ join.alias }}{% endif %} ON {{ join.condition }}
+    {% endfor %}
+    {% endif %}
+
+    {% if where is defined and where %}
+    WHERE {{ where }}
+    {% endif %}
+
+    {% if group_by is defined and group_by %}
+    GROUP BY {% for column in group_by %}{{ column }}{% if not loop.last %}, {% endif %}{% endfor %}
+    {% endif %}
+
+    {% if having is defined and having %}
+    HAVING {{ having }}
+    {% endif %}
+
+    {% if order_by is defined and order_by %}
+    ORDER BY {% for column in order_by %}{{ column.column }} {{ column.direction | default('ASC') }}{% if not loop.last %}, {% endif %}{% endfor %}
+    {% endif %}
+
+    {% if limit is defined or offset is defined %}
+    {% if dialect == 'postgresql' %}
+    {% if limit is defined %}LIMIT {{ limit }}{% endif %}
+    {% if offset is defined %}OFFSET {{ offset }}{% endif %}
+    {% else %}
+    {# MySQL syntax #}
+    LIMIT {% if offset is defined %}{{ offset }}, {% endif %}{% if limit is defined %}{{ limit }}{% else %}18446744073709551615{% endif %}
+    {% endif %}
+    {% endif %}
+){% if alias is defined and alias %} AS {{ alias }}{% endif %}

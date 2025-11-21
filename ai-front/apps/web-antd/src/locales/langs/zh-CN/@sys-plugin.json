@@ -1,0 +1,18 @@
+{
+  "installPlugin": "安装插件",
+  "pluginStatusChangeAlert": "检测到插件状态存在变更，为了确保系统能够正常运行，请尽快联系系统管理员进行相关调整",
+  "enable": "启用",
+  "disable": "禁用",
+  "package": "打包",
+  "uninstall": "卸载",
+  "confirmPackageDownload": "确认打包并下载此插件吗？",
+  "confirmUninstall": "确认删除此插件吗？",
+  "installMethod": "安装方式",
+  "zipPackage": "压缩包",
+  "git": "GIT",
+  "zipFile": "ZIP 压缩包",
+  "upload": "Upload",
+  "zipFileHelp": "仅能上传一个 zip 压缩包文件，重新上传则覆盖",
+  "gitAddress": "GIT 地址",
+  "gitAddressHelp": "仓库内容无法实时检测，请谨慎操作，避免非插件代码植入"
+}

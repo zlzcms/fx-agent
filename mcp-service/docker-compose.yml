@@ -1,0 +1,28 @@
+services:
+  mcp_service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mcp_service:${BUILD_NUMBER:-latest}
+    container_name: mcp_service
+    ports:
+      - "8008:8008"  # FastAPI服务端口
+      - "8009:8009"  # MCP协议服务端口
+    volumes:
+      - ./.env:/app/.env:ro        # 环境变量文件(只读)
+      - ./logs:/app/logs          # 日志目录持久化
+      - ./app:/app/app:ro         # 应用代码挂载(只读)
+      - ./core:/app/core:ro       # 核心模块挂载(只读)
+      - ./utils:/app/utils:ro     # 工具模块挂载(只读)
+      - ./db:/app/db:ro           # 数据库模块挂载(只读)
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+      - TZ=Asia/Shanghai
+    restart: unless-stopped
+    networks:
+      - fba_network
+
+networks:
+  fba_network:
+    external: true

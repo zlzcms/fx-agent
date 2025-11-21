@@ -1,0 +1,40 @@
+{#- DELETE template with support for PostgreSQL and MySQL -#}
+{% if with_clauses is defined and with_clauses %}
+WITH
+{% for with_name, with_query in with_clauses.items() %}
+{{ with_name }} AS (
+    {{ with_query }}
+){% if not loop.last %},{% endif %}
+{% endfor %}
+{% endif %}
+
+DELETE FROM {% if database is defined %}{{ database }}.{% endif %}{{ table }}{% if table_alias is defined and table_alias and dialect == 'postgresql' %} AS {{ table_alias }}{% endif %}
+
+{% if using is defined and using and dialect == 'postgresql' %}
+USING
+{% for using_table in using %}
+{% if using_table.database is defined %}{{ using_table.database }}.{% endif %}{{ using_table.table }}{% if using_table.alias is defined %} AS {{ using_table.alias }}{% endif %}{% if not loop.last %},{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if joins is defined and joins and dialect == 'mysql' %}
+{% for join in joins %}
+{{ join.type | default('INNER') }} JOIN {% if join.database is defined %}{{ join.database }}.{% endif %}{{ join.table }}{% if join.alias is defined %} AS {{ join.alias }}{% endif %} ON {{ join.condition }}
+{% endfor %}
+{% endif %}
+
+{% if where is defined and where %}
+WHERE {{ where }}
+{% endif %}
+
+{% if order_by is defined and order_by and dialect == 'mysql' %}
+ORDER BY {% for column in order_by %}{{ column.column }} {{ column.direction | default('ASC') }}{% if not loop.last %}, {% endif %}{% endfor %}
+{% endif %}
+
+{% if limit is defined and limit and dialect == 'mysql' %}
+LIMIT {{ limit }}
+{% endif %}
+
+{% if returning is defined and returning and dialect == 'postgresql' %}
+RETURNING {% for column in returning %}{{ column }}{% if not loop.last %}, {% endif %}{% endfor %}
+{% endif %}

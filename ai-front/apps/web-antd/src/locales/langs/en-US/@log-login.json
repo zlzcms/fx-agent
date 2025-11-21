@@ -1,0 +1,18 @@
+{
+  "title": "Login Log",
+  "username": "Username",
+  "ipAddress": "IP Address",
+  "loginTime": "Login Time",
+  "status": "Status",
+  "success": "Success",
+  "failed": "Failed",
+  "country": "Country",
+  "region": "Region",
+  "operatingSystem": "Operating System",
+  "browser": "Browser",
+  "device": "Device",
+  "message": "Message",
+  "actions": "Actions",
+  "deleteLog": "Delete Log",
+  "confirmDelete": "Are you sure you want to delete the selected records?"
+}

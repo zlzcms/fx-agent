@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# 虚拟环境
+env/
+venv/
+.venv/
+
+# 编辑器/IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# Node.js
+node_modules/
+
+# 日志和数据库
+*.log
+*.sqlite3
+*.db
+db.sqlite3
+
+# 数据和临时文件
+data/
+tmp/
+*.tmp
+*.bak
+*.swp
+
+# 测试和文档
+tests/
+docs/
+coverage/
+htmlcov/
+
+# Git
+.git/
+.gitignore
+
+# Docker自身
+Dockerfile*
+docker-compose*
+
+# 其他
+*.env
+.env*
+*.egg-info/

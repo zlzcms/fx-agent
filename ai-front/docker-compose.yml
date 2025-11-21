@@ -1,0 +1,47 @@
+networks:
+  fba_network:
+#    name: fba_network
+#    driver: bridge
+    external: true
+
+volumes:
+  fba_static:
+    external: true
+  fba_static_upload:
+    external: true
+
+services:
+  fba_ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # 添加构建缓存配置
+      cache_from:
+        - fba_ui:latest
+    image: fba_ui:${BUILD_NUMBER:-latest}
+    ports:
+      - "8088:80"
+    #   - "443:443"
+    container_name: fba_ui
+    restart: always
+
+    command:
+      - nginx
+      - -g
+      - daemon off;
+    volumes:
+      # nginx https conf
+      # When deploying through docker, you need to open this configuration item and
+      # ensure that the docker_ssl path is consistent with that in nginx conf
+      # - local_ssl_pem_path:/etc/ssl/xxx.pem
+      # - local_ssl_key_path:/etc/ssl/xxx.key
+      - fba_static:/var/www/fba_server/backend/static
+      - fba_static_upload:/www/fba_server/backend/static/upload
+    networks:
+      - fba_network
+    # 添加依赖等待
+    depends_on: []
+    # 添加环境变量
+    environment:
+      - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
+      - NGINX_PORT=80

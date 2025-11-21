@@ -1,0 +1,253 @@
+{
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "codeLogin": "Code Login",
+    "qrcodeLogin": "QR Code Login",
+    "forgetPassword": "Forget Password",
+    "captchaPlaceholder": "Please enter captcha",
+    "captchaRequired": "Captcha is required"
+  },
+  "dashboard": {
+    "title": "Data Overview",
+    "analytics": "Analytics",
+    "workspace": "Workspace"
+  },
+  "form": {
+    "query": "Query",
+    "select": "Please select",
+    "status": "Status"
+  },
+  "menu": {
+    "system": "System Management",
+    "automation": "System Automation",
+    "codeGenerator": "Code Generator",
+    "log": "System Log",
+    "login": "Login Log",
+    "monitor": "System Monitor",
+    "opera": "Operation Log",
+    "online": "Online Users",
+    "redis": "Redis",
+    "server": "Server",
+    "sysDataPermission": "Data Permission",
+    "sysDataScope": "Data Scope",
+    "sysDataRule": "Data Rule",
+    "SysPlugin": "System Plugin",
+    "sysDept": "System Department",
+    "sysMenu": "System Menu",
+    "sysRole": "System Role",
+    "sysUser": "System User",
+    "ai": "AI Management",
+    "aiModels": "AI Models",
+    "aiAssistants": "AI Assistants",
+    "aiDatasources": "Data Source Management",
+    "aiDatasourcesList": "Data Source List",
+    "aiDatabaseManager": "Data Warehouse",
+    "aiTemplates": "Template Management",
+    "aiAssistantAdd": "Add AI Assistant",
+    "aiAssistantEdit": "Edit AI Assistant",
+    "aiAssistantTypes": "Assistant Types",
+    "aiSubscription": "Assistant Subscription",
+    "risk": "Risk Management",
+    "riskLevels": "Risk Levels",
+    "riskTagCategoryList": "Risk Tags",
+    "riskTagList": "Tag List",
+    "riskAssistant": "Risk Assistant",
+    "riskSettings": "Risk Settings",
+    "riskAssistantAdd": "Add Risk Assistant",
+    "riskAssistantEdit": "Edit Risk Assistant",
+    "aiAssistant": "AI Assistant",
+    "aiAssistantQa": "AI Q&A",
+    "aiAssistantReports": "AI Reports",
+    "mcp": "MCP Service",
+    "riskCustomer": "Customer Risk",
+    "riskEmployee": "Employee Risk",
+    "schedulerManage": "Task Scheduler Management",
+    "schedulerRecord": "Task Execution Records",
+    "profile": "Profile"
+  },
+  "monitor": {
+    "redis": {
+      "cards": {
+        "commands": {
+          "title": "Command Statistics"
+        },
+        "memory": {
+          "title": "Memory Status"
+        }
+      },
+      "desc": {
+        "title": "Basic Information"
+      },
+      "info": {
+        "arch": "Architecture",
+        "clients": "Connections",
+        "commands_processed": "Commands Processed",
+        "connections_received": "Connections Received",
+        "keys_command_stats": "Query Count",
+        "keys_num": "Keys Count",
+        "memory_human": "Allocated Memory",
+        "mode": "Mode",
+        "os": "Operating System",
+        "rejected_connections": "Rejected Connections",
+        "role": "Role",
+        "title": "Basic Information",
+        "uptime": "Uptime",
+        "used_cpu": "CPU Usage",
+        "used_cpu_children": "Background CPU Usage",
+        "version": "Version"
+      },
+      "stats": {
+        "title": {
+          "used_memory": "Used Memory"
+        }
+      }
+    },
+    "server": {
+      "cpu": {
+        "current_freq": "Current Frequency",
+        "logical_num": "Logical Cores",
+        "physical_num": "Physical Cores",
+        "usage": "Usage"
+      },
+      "disk": {
+        "device": "Device",
+        "dir": "Directory",
+        "free": "Free",
+        "title": "Disk",
+        "total": "Total",
+        "type": "Type",
+        "usage": "Usage",
+        "used": "Used"
+      },
+      "memory": {
+        "free": "Free",
+        "title": "Memory",
+        "total": "Total",
+        "usage": "Usage",
+        "used": "Used"
+      },
+      "service": "Service",
+      "system": "System"
+    }
+  },
+  "table": {
+    "created_time": "Created Time",
+    "id": "ID",
+    "mark": "Remark",
+    "operation": "Operation",
+    "updated_time": "Updated Time"
+  },
+  "components": {
+    "modelDefinition": {
+      "modelDefinition": "Model Definition",
+      "description": "Detailed description of model functionality, capabilities and usage scenarios, AI polishing function can help optimize expression",
+      "aiPolish": "AI Polish",
+      "placeholder": "Please enter detailed model definition and capability description",
+      "supportDescription": "Support detailed description of model functional features, application scenarios and technical requirements",
+      "pleaseInputFirst": "Please enter model definition content first",
+      "modelOverview": "Model Overview",
+      "features": "Features",
+      "applicationScenarios": "Application Scenarios",
+      "dataAnalysis": "Data Analysis and Processing",
+      "intelligentDecision": "Intelligent Decision Support",
+      "automatedReports": "Automated Report Generation",
+      "dataResources": "Data Resources",
+      "deepAnalysis": "Deep Analysis",
+      "intelligentProcessing": "Intelligent Processing",
+      "analysisReports": "Analysis Reports",
+      "aiPolishSuccess": "AI polishing completed, content optimized",
+      "aiPolishFailed": "AI polishing failed",
+      "aiPolishError": "AI polishing failed, please try again"
+    },
+    "tableFieldConfig": {
+      "fieldName": "Field Name",
+      "fieldType": "Type",
+      "fieldDesc": "Description",
+      "add": "Add",
+      "delete": "Delete",
+      "enterFieldName": "Please enter field name",
+      "selectType": "Please select type",
+      "enterDescription": "Please enter description",
+      "emptyText": "No field configuration, click the 'Add' button above to add fields",
+      "fieldTypes": {
+        "string": "String",
+        "number": "Number",
+        "date": "Date",
+        "boolean": "Boolean"
+      }
+    },
+    "markdownEditor": {
+      "documentTemplate": "Document Template",
+      "selectTemplate": "Please select document template",
+      "markdownEditor": "Markdown Editor",
+      "edit": "Edit",
+      "preview": "Preview",
+      "split": "Split",
+      "markdownSupport": "Supports Markdown syntax",
+      "enterMarkdownContent": "Please enter Markdown content...",
+      "noContent": "No content",
+      "renderError": "Markdown rendering error",
+      "renderErrorMsg": "Content rendering error, please check Markdown syntax",
+      "standardReport": "Standard Report",
+      "simpleReport": "Simple Report",
+      "detailedReport": "Detailed Report",
+      "customReport": "Custom Report"
+    },
+    "dataPermissionConfig": {
+      "noPermissionsSelected": "No data permissions selected",
+      "clickToConfigure": "Click the button below to configure data access permissions",
+      "configureDataPermission": "Configure Data Permission",
+      "dataPermissionConfig": "Data Permission Configuration",
+      "searchPermission": "Search permission name or description...",
+      "filterPermissionType": "Filter permission type",
+      "allTypes": "All Types",
+      "timeRange": "Time Range",
+      "userScope": "User Scope",
+      "ipRange": "IP Range",
+      "dataScope": "Data Scope",
+      "fieldLevel": "Field Level",
+      "viewDetailConfig": "View Detail Configuration",
+      "cancel": "Cancel",
+      "confirmSelection": "Confirm Selection",
+      "permissionDetail": "Permission Detail",
+      "detailConfig": "Detail Configuration",
+      "permissionId": "Permission ID",
+      "createdTime": "Created Time",
+      "status": "Status",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "typeLabels": {
+        "time_range": "Time Range",
+        "user_scope": "User Scope",
+        "ip_range": "IP Range",
+        "data_scope": "Data Scope",
+        "field_level": "Field Level",
+        "custom": "Custom"
+      },
+      "preview": {
+        "workTime": "Work Time",
+        "workdays": "Workdays",
+        "notSet": "Not Set",
+        "allowedUsers": "Allowed Users",
+        "allowedDepartments": "Allowed Departments",
+        "allowedIPs": "Allowed IPs",
+        "vpnAccess": "VPN Access",
+        "allow": "Allow",
+        "deny": "Deny",
+        "maxRows": "Max Rows",
+        "unlimited": "Unlimited",
+        "allowedDatabases": "Allowed Databases",
+        "allowedFields": "Allowed Fields",
+        "blockedFields": "Blocked Fields",
+        "customRules": "Custom Rules",
+        "approvalRequired": "Approval Required",
+        "yes": "Yes",
+        "no": "No",
+        "unitCount": "",
+        "unitDay": "day(s)",
+        "unitRule": "rule(s)"
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+
+> @vben/web-antd@5.5.7 build /home/user/www/ai-front/apps/web-antd
+> pnpm vite build --mode production
+
+vite v6.3.5 building for production...
+transforming...
+✓ 588 modules transformed.
+
+ ERROR  ✗ Build failed in 4.11s
+
+
+ ERROR  error during build:
+[vite:vue] [vue/compiler-sfc] Identifier 'validateBasicForms' has already been declared. (1998:15)
+
+/home/user/www/ai-front/apps/web-antd/src/views/ai/assistants/form copy 5.vue
+1996|
+1997|  // 安全验证函数分别验证每个表单
+1998|  async function validateBasicForms() {
+   |                 ^
+1999|    if (!basicInfoFormRef.value) return { valid: false, errors: ['基本信息表单未初始化'] };
+2000|    return await basicInfoFormRef.value.validateBasicForms();
+file: /home/user/www/ai-front/apps/web-antd/src/views/ai/assistants/form copy 5.vue:1998:15
+    at constructor (/home/user/www/ai-front/node_modules/.pnpm/@babel+parser@7.27.5/node_modules/@babel/parser/lib/index.js:363:19)
+    at TypeScriptParserMixin.raise (/home/user/www/ai-front/node_modules/.pnpm/@babel+parser@7.27.5/node_modules/@babel/parser/lib/index.js:6609:19)
+    at TypeScriptScopeHandler.checkRedeclarationInScope (/home/user/www/ai-front/node_modules/.pnpm/@babel+parser@7.27.5/node_modules/@babel/parser/lib/index.js:1626:19)
+    at TypeScriptScopeHandler.declareName (/home/user/www/ai-front/node_modules/.pnpm/@babel+parser@7.27.5/node_modules/@babel/parser/lib/index.js:1592:12)
+    at TypeScriptScopeHandler.declareName (/home/user/www/ai-front/node_modules/.pnpm/@babel+parser@7.27.5/node_modules/@babel/parser/lib/index.js:4892:11)
+    at TypeScriptParserMixin.registerFunctionStatementId (/home/user/www/ai-front/node_modules/.pnpm/@babel+parser@7.27.5/node_modules/@babel/parser/lib/index.js:13381:16)
+    at TypeScriptParserMixin.registerFunctionStatementId (/home/user/www/ai-front/node_modules/.pnpm/@babel+parser@7.27.5/node_modules/@babel/parser/lib/index.js:9200:13)
+    at TypeScriptParserMixin.parseFunction (/home/user/www/ai-front/node_modules/.pnpm/@babel+parser@7.27.5/node_modules/@babel/parser/lib/index.js:13365:12)
+    at TypeScriptParserMixin.parseFunctionStatement (/home/user/www/ai-front/node_modules/.pnpm/@babel+parser@7.27.5/node_modules/@babel/parser/lib/index.js:13044:17)
+    at TypeScriptParserMixin.parseStatementContent (/home/user/www/ai-front/node_modules/.pnpm/@babel+parser@7.27.5/node_modules/@babel/parser/lib/index.js:12809:25)
+
+ ELIFECYCLE  Command failed with exit code 1.
+
+rsync -avz -e ssh ./apps/web-antd/dist/ root@47.239.101.153:/www/ai/ai-front/apps/web-antd/dist/

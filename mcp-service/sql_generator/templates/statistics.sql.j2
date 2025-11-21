@@ -1,0 +1,46 @@
+{#- Statistics template with support for PostgreSQL and MySQL -#}
+{% if with_clauses is defined and with_clauses %}
+WITH
+{% for with_name, with_query in with_clauses.items() %}
+{{ with_name }} AS (
+    {{ with_query }}
+){% if not loop.last %},{% endif %}
+{% endfor %}
+{% endif %}
+
+SELECT
+{%- for col in columns %}
+    {{ col.expr }} AS {{ col.alias }}{% if not loop.last %}, {% endif %}
+{%- endfor %}
+FROM {{ table }}
+{%- if where %}
+
+WHERE {{ where }}
+{%- endif %}
+{%- if group_by %}
+
+GROUP BY
+    {%- for col in group_by %}
+        {{ col }}{% if not loop.last %}, {% endif %}
+    {%- endfor %}
+{%- endif %}
+{%- if having %}
+
+HAVING {{ having }}
+{%- endif %}
+{%- if order_by %}
+
+ORDER BY
+    {%- for order in order_by %}
+        {%- if order is mapping %}
+            {{ order.column }} {{ order.direction }}
+        {%- else %}
+            {{ order }}
+        {%- endif %}
+        {%- if not loop.last %}, {% endif %}
+    {%- endfor %}
+{%- endif %}
+{%- if limit is defined %}
+
+LIMIT {{ limit }}
+{%- endif %}

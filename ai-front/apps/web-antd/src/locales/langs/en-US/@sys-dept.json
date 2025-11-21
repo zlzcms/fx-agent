@@ -1,0 +1,21 @@
+{
+  "addDept": "Add Department",
+  "editDept": "Edit Department",
+  "createDept": "Create Department",
+  "deptName": "Department Name",
+  "name": "Name",
+  "leader": "Leader",
+  "phone": "Phone",
+  "phoneNumber": "Phone Number",
+  "email": "Email",
+  "emailAddress": "Email Address",
+  "sort": "Sort",
+  "status": "Status",
+  "parentDept": "Parent Department",
+  "addSubDept": "Add Sub-Department",
+  "expandAll": "Expand All",
+  "collapseAll": "Collapse All",
+  "normal": "Normal",
+  "stopped": "Stopped",
+  "invalidEmail": "Invalid email address"
+}

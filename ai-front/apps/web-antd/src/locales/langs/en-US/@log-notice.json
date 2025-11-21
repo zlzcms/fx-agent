@@ -1,0 +1,23 @@
+{
+  "title": "Notice Logs",
+  "notificationDescription": "Notification Description",
+  "notificationDescriptionPlaceholder": "Please enter notification description keywords",
+  "notificationMethod": "Notification Method",
+  "notificationMethodPlaceholder": "Please select notification method",
+  "email": "Email",
+  "larkWebhook": "Lark Webhook",
+  "successStatus": "Success Status",
+  "successStatusPlaceholder": "Please select success status",
+  "success": "Success",
+  "failed": "Failed",
+  "startTime": "Start Time",
+  "startTimePlaceholder": "Please select start time",
+  "endTime": "End Time",
+  "endTimePlaceholder": "Please select end time",
+  "id": "ID",
+  "notificationContent": "Notification Content",
+  "notificationAddress": "Notification Address",
+  "status": "Status",
+  "failureReason": "Failure Reason",
+  "createdTime": "Created Time"
+}

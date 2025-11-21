@@ -1,0 +1,1 @@
+export { default as ModelDefinition } from './index.vue'; 

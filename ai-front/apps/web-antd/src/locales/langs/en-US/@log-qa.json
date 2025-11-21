@@ -1,0 +1,15 @@
+{
+  "title": "Q&A Logs",
+  "sessionId": "Session ID",
+  "userId": "User ID",
+  "role": "Role",
+  "username": "Username",
+  "nickname": "Nickname",
+  "content": "Content",
+  "isInterrupted": "Is Interrupted",
+  "createdTime": "Created Time",
+  "updatedTime": "Updated Time",
+  "generatedFile": "Generated File",
+  "sessionDetails": "Session Details",
+  "none": "None"
+}

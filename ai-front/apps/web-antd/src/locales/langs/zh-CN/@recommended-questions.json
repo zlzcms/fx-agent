@@ -1,0 +1,19 @@
+{
+  "title": "推荐问法",
+  "addQuestion": "新增推荐问法",
+  "questionTitle": "标题",
+  "content": "内容",
+  "contentPlaceholder": "请输入推荐问法内容",
+  "roles": "角色",
+  "associatedRoles": "关联角色",
+  "sortOrder": "排序",
+  "isDefault": "默认",
+  "isDefaultQuestion": "默认问法",
+  "yes": "是",
+  "no": "否",
+  "notSet": "未设置",
+  "normal": "正常",
+  "disabled": "禁用",
+  "editTitle": "编辑推荐问法",
+  "createTitle": "新增推荐问法"
+}

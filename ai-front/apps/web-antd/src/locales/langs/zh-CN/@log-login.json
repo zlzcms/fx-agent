@@ -1,0 +1,18 @@
+{
+  "title": "登录日志",
+  "username": "用户名",
+  "ipAddress": "IP地址",
+  "loginTime": "登录时间",
+  "status": "状态",
+  "success": "成功",
+  "failed": "失败",
+  "country": "国家",
+  "region": "地区",
+  "operatingSystem": "操作系统",
+  "browser": "浏览器",
+  "device": "设备",
+  "message": "消息",
+  "actions": "操作",
+  "deleteLog": "删除日志",
+  "confirmDelete": "确定删除已勾选的记录吗？"
+}

@@ -1,0 +1,18 @@
+{
+  "installPlugin": "Install Plugin",
+  "pluginStatusChangeAlert": "Plugin status changes detected. To ensure the system runs properly, please contact the system administrator for adjustments as soon as possible",
+  "enable": "Enable",
+  "disable": "Disable",
+  "package": "Package",
+  "uninstall": "Uninstall",
+  "confirmPackageDownload": "Confirm package and download this plugin?",
+  "confirmUninstall": "Confirm delete this plugin?",
+  "installMethod": "Install Method",
+  "zipPackage": "ZIP Package",
+  "git": "GIT",
+  "zipFile": "ZIP Package",
+  "upload": "Upload",
+  "zipFileHelp": "Only one zip package file can be uploaded, re-uploading will overwrite",
+  "gitAddress": "GIT Address",
+  "gitAddressHelp": "Repository content cannot be detected in real-time, please operate carefully to avoid non-plugin code injection"
+}

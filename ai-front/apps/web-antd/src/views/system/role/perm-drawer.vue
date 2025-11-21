@@ -1,0 +1,285 @@
+<script lang="ts" setup>
+import type { VbenFormProps } from '@vben/common-ui';
+import type { VxeTableGridOptions } from '@vben/plugins/vxe-table';
+
+import type { OnActionClickParams } from '#/adapter/vxe-table';
+import type { SysDataScopeResult, SysMenuTreeResult } from '#/api';
+
+import { nextTick, ref, watch } from 'vue';
+
+import { useVbenDrawer } from '@vben/common-ui';
+import { $t } from '@vben/locales';
+
+import { message } from 'ant-design-vue';
+
+import { useVbenVxeGrid } from '#/adapter/vxe-table';
+import {
+  getSysDataScopesApi,
+  getSysMenuTreeApi,
+  getSysRoleDataScopesApi,
+  updateSysRoleDataScopesApi,
+  updateSysRoleMenuApi,
+} from '#/api';
+
+import { drawerColumns, drawerDataScopeColumns, drawerQuerySchema } from './data';
+import ExtraDataRuleDrawer from './data-rule-drawer.vue';
+
+const activeKey = ref('0');
+const clickRow = ref<number>(0);
+const defaultCheckedRoleMenuKeys = ref<number[]>([]);
+const checkStrictly = ref<boolean>(true);
+const defaultCheckedDataScopesKeys = ref<number[]>([]);
+
+const [Drawer, drawerApi] = useVbenDrawer({
+  destroyOnClose: true,
+  header: false,
+  class: 'w-1/2',
+  onCancel() {
+    drawerApi.close();
+  },
+  onConfirm() {
+    if (activeKey.value === '0') {
+      const indeterminateRows = gridApi.grid.getCheckboxIndeterminateRecords();
+      const checkedRows = gridApi.grid.getCheckboxRecords(true);
+      updateSysRoleMenuApi(clickRow.value, [
+        ...indeterminateRows.map((item: any) => item.id),
+        ...checkedRows.map((item: any) => item.id),
+      ]).then(() => {
+        message.success($t('ui.actionMessage.operationSuccess'));
+        drawerApi.close();
+      });
+    } else {
+      const checkedRows = dataScopeGridApi.grid.getCheckboxRecords(true);
+      updateSysRoleDataScopesApi(
+        clickRow.value,
+        checkedRows.map((item: any) => item.id),
+      ).then(() => {
+        message.success($t('ui.actionMessage.operationSuccess'));
+        drawerApi.close();
+      });
+    }
+  },
+  onOpenChange(isOpen: boolean) {
+    clickRow.value = drawerApi.getData().pk;
+    if (isOpen && activeKey.value === '0') {
+      defaultCheckedRoleMenuKeys.value = drawerApi.getData().checkedRoleMenu;
+    }
+  },
+});
+
+const processTreeData = (nodes: any[]) => {
+  return nodes.map((node) => {
+    const processedNode = {
+      ...node,
+      title: $t(node.title),
+    };
+
+    if (node.children && node.children.length > 0) {
+      processedNode.children = processTreeData(node.children);
+    }
+
+    return processedNode;
+  });
+};
+
+/**
+ * 菜单权限
+ */
+const formOptions: VbenFormProps = {
+  showCollapseButton: false,
+  submitButtonOptions: {
+    content: $t('views.common.query'),
+  },
+  commonConfig: {
+    componentProps: {
+      class: 'w-full',
+    },
+  },
+  wrapperClass: 'grid-cols-2',
+  schema: drawerQuerySchema,
+};
+
+const gridOptions: VxeTableGridOptions<SysMenuTreeResult> = {
+  rowConfig: {
+    keyField: 'id',
+  },
+  toolbarConfig: {
+    zoom: true,
+  },
+  checkboxConfig: {
+    labelField: 'title',
+    highlight: true,
+    checkRowKeys: [],
+    showHeader: false,
+    checkStrictly: true,
+  },
+  pagerConfig: {
+    enabled: false,
+  },
+  treeConfig: {
+    parentField: 'parent_id',
+    expandAll: true,
+  },
+  columns: drawerColumns,
+  proxyConfig: {
+    ajax: {
+      query: async (_, formValues) => {
+        const res = await getSysMenuTreeApi(formValues);
+        return processTreeData(res);
+      },
+    },
+  },
+};
+
+const [Grid, gridApi] = useVbenVxeGrid({ formOptions, gridOptions });
+
+const expandAll = () => {
+  gridApi.grid?.setAllTreeExpand(true);
+};
+
+const collapseAll = () => {
+  gridApi.grid?.setAllTreeExpand(false);
+};
+
+watch(defaultCheckedRoleMenuKeys, async (newValue) => {
+  await nextTick();
+  gridApi.setGridOptions({
+    checkboxConfig: {
+      checkRowKeys: newValue,
+    },
+  });
+});
+
+watch(checkStrictly, (newValue) => {
+  gridApi.setGridOptions({
+    checkboxConfig: {
+      showHeader: !newValue,
+      checkStrictly: newValue,
+    },
+  });
+});
+
+/**
+ * 数据权限
+ */
+const dataScopeGridOptions: VxeTableGridOptions<SysMenuTreeResult> = {
+  rowConfig: {
+    keyField: 'id',
+  },
+  height: 'auto',
+  virtualYConfig: {
+    enabled: true,
+    gt: 0,
+  },
+  checkboxConfig: {
+    labelField: 'name',
+    highlight: true,
+    checkRowKeys: [],
+  },
+  pagerConfig: {
+    enabled: false,
+  },
+  columns: drawerDataScopeColumns(onActionClick),
+  proxyConfig: {
+    ajax: {
+      query: async () => {
+        return await getSysDataScopesApi();
+      },
+    },
+  },
+};
+
+const [DataScopeGrid, dataScopeGridApi] = useVbenVxeGrid({
+  gridOptions: dataScopeGridOptions,
+});
+
+function onActionClick({ code, row }: OnActionClickParams<SysDataScopeResult>) {
+  switch (code) {
+    case 'details': {
+      dataRuleDrawerApi
+        .setData({
+          clickedDataScopeRow: row,
+        })
+        .open();
+      break;
+    }
+  }
+}
+
+watch(activeKey, async (newValue) => {
+  if (newValue === '1') {
+    defaultCheckedDataScopesKeys.value = await getSysRoleDataScopesApi(clickRow.value);
+    dataScopeGridApi.setGridOptions({
+      checkboxConfig: {
+        checkRowKeys: defaultCheckedDataScopesKeys.value,
+      },
+    });
+  }
+});
+
+/**
+ * 规则详情
+ */
+const [DataRuleDrawer, dataRuleDrawerApi] = useVbenDrawer({
+  connectedComponent: ExtraDataRuleDrawer,
+});
+</script>
+<template>
+  <Drawer>
+    <a-tabs v-model:active-key="activeKey" type="card">
+      <a-tab-pane key="0" :tab="$t('@sys-role.menuPermission')">
+        <Grid>
+          <template #toolbar-actions>
+            <a-radio-group v-model:value="checkStrictly" class="h-8" button-style="solid">
+              <a-radio-button :value="true">
+                {{ $t('@sys-role.parentChildIndependent') }}
+              </a-radio-button>
+              <a-radio-button :value="false">
+                {{ $t('@sys-role.parentChildLinked') }}
+              </a-radio-button>
+            </a-radio-group>
+            <a-alert class="mx-2 h-8" type="info">
+              <template #message>
+                <div>
+                  {{ $t('@sys-role.associated') }}
+                  <span class="text-primary mx-1 font-semibold">
+                    {{ defaultCheckedRoleMenuKeys.length }}
+                  </span>
+                  {{ $t('@sys-role.nodesNonRealtime') }}
+                </div>
+              </template>
+            </a-alert>
+          </template>
+          <template #toolbar-tools>
+            <a-button class="mr-2" type="primary" @click="expandAll">
+              {{ $t('@sys-role.expandAll') }}
+            </a-button>
+            <a-button type="primary" @click="collapseAll">
+              {{ $t('@sys-role.collapseAll') }}
+            </a-button>
+          </template>
+        </Grid>
+      </a-tab-pane>
+      <a-tab-pane key="1" :tab="$t('@sys-role.dataPermission')">
+        <div class="h-[775px]">
+          <DataScopeGrid>
+            <template #toolbar-actions>
+              <a-alert class="h-8" type="info">
+                <template #message>
+                  <div>
+                    {{ $t('@sys-role.associated') }}
+                    <span class="text-primary mx-1 font-semibold">
+                      {{ defaultCheckedDataScopesKeys.length }}
+                    </span>
+                    {{ $t('@sys-role.dataScopeNodesNonRealtime') }}
+                  </div>
+                </template>
+              </a-alert>
+            </template>
+          </DataScopeGrid>
+        </div>
+      </a-tab-pane>
+    </a-tabs>
+  </Drawer>
+  <DataRuleDrawer />
+</template>

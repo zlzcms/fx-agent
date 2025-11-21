@@ -1,0 +1,11 @@
+{
+  "type": "insert",
+  "table": "users",
+  "database": "mydb",
+  "columns": ["name", "email", "status", "created_at"],
+  "values": [
+    ["John Doe", "john@example.com", "active", "2023-09-28"],
+    ["Jane Smith", "jane@example.com", "active", "2023-09-28"]
+  ],
+  "returning": ["id", "created_at"]
+}

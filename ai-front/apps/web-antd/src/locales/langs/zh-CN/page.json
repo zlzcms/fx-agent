@@ -1,0 +1,284 @@
+{
+  "auth": {
+    "login": "登录",
+    "register": "注册",
+    "codeLogin": "验证码登录",
+    "qrcodeLogin": "二维码登录",
+    "forgetPassword": "忘记密码",
+    "captchaPlaceholder": "请输入验证码",
+    "captchaRequired": "验证码是必须的"
+  },
+  "dashboard": {
+    "title": "数据概览",
+    "analytics": "分析页",
+    "workspace": "工作台"
+  },
+  "form": {
+    "query": "查询",
+    "select": "请选择",
+    "status": "状态"
+  },
+  "authentication": {
+    "agree": "同意",
+    "agreeTip": "请同意服务条款",
+    "code": "验证码",
+    "confirmPassword": "确认密码",
+    "confirmPasswordTip": "请确认密码",
+    "email": "邮箱",
+    "emailTip": "请输入邮箱",
+    "emailValidErrorTip": "邮箱格式不正确",
+    "loginSuccess": "登录成功",
+    "loginSuccessDesc": "登录成功，正在跳转",
+    "mobile": "手机号",
+    "mobileErrortip": "手机号格式不正确",
+    "mobileTip": "请输入手机号",
+    "pageDesc": "页面描述",
+    "pageTitle": "页面标题",
+    "password": "密码",
+    "passwordStrength": "密码强度",
+    "passwordTip": "请输入密码",
+    "privacyPolicy": "隐私政策",
+    "selectAccount": "选择账户",
+    "sendCode": "发送验证码",
+    "terms": "服务条款",
+    "thirdPartyLogin": "第三方登录",
+    "username": "用户名",
+    "usernameTip": "请输入用户名"
+  },
+  "menu": {
+    "system": "系统管理",
+    "automation": "系统自动化",
+    "codeGenerator": "代码生成",
+    "log": "系统日志",
+    "login": "登录日志",
+    "monitor": "系统监控",
+    "opera": "操作日志",
+    "online": "在线用户",
+    "redis": "Redis",
+    "server": "服务器",
+    "sysDataPermission": "数据权限",
+    "sysDataScope": "数据范围",
+    "sysDataRule": "数据规则",
+    "SysPlugin": "系统插件",
+    "sysDept": "系统部门",
+    "sysMenu": "系统菜单",
+    "sysRole": "系统角色",
+    "sysUser": "系统用户",
+    "ai": "AI管理",
+    "aiModels": "AI大模型",
+    "aiAssistants": "助理管理",
+    "aiDatasources": "数据源",
+    "aiDatasourcesList": "数据源列表",
+    "aiDatabaseManager": "数据仓库",
+    "aiTemplates": "模板管理",
+    "aiAssistantAdd": "添加AI助手",
+    "aiAssistantEdit": "编辑AI助手",
+    "aiAssistantTypes": "助手类型",
+    "aiSubscription": "助理订阅",
+    "risk": "风控管理",
+    "riskLevels": "风控等级",
+    "riskTagCategoryList": "标签分类",
+    "riskTagList": "标签列表",
+    "riskAssistant": "风控助手",
+    "riskSettings": "风控配置",
+    "riskAssistantAdd": "添加风控助手",
+    "riskAssistantEdit": "编辑风控助手",
+    "aiAssistant": "AI助理",
+    "aiAssistantQa": "AI问答",
+    "aiAssistantReports": "AI报告",
+    "mcp": "MCP服务",
+    "riskCustomer": "客户风控",
+    "riskEmployee": "员工风控",
+    "schedulerManage": "任务调度管理",
+    "schedulerRecord": "任务执行记录",
+    "profile": "个人中心",
+    "scheduler": "任务调度"
+  },
+  "monitor": {
+    "redis": {
+      "cards": {
+        "commands": {
+          "title": "命令统计"
+        },
+        "memory": {
+          "title": "内存情况"
+        }
+      },
+      "desc": {
+        "title": "基本信息"
+      },
+      "info": {
+        "arch": "架构",
+        "clients": "连接数",
+        "commands_processed": "已执行命令",
+        "connections_received": "可接受连接数",
+        "keys_command_stats": "查询次数",
+        "keys_num": "Keys 数量",
+        "memory_human": "已分配内存",
+        "mode": "模式",
+        "os": "操作系统",
+        "rejected_connections": "已拒绝连接",
+        "role": "角色",
+        "title": "基础信息",
+        "uptime": "运行时间",
+        "used_cpu": "CPU 消耗",
+        "used_cpu_children": "后台 CPU 占用",
+        "version": "版本"
+      },
+      "stats": {
+        "title": {
+          "used_memory": "已使用内存"
+        }
+      }
+    },
+    "server": {
+      "cpu": {
+        "current_freq": "当前频率",
+        "logical_num": "逻辑核心数",
+        "physical_num": "物理核心数",
+        "usage": "使用率"
+      },
+      "disk": {
+        "device": "设备",
+        "dir": "路径",
+        "free": "空闲",
+        "title": "磁盘",
+        "total": "总计",
+        "type": "类型",
+        "usage": "使用率",
+        "used": "已使用"
+      },
+      "memory": {
+        "free": "空闲",
+        "title": "内存",
+        "total": "总量",
+        "usage": "使用率",
+        "used": "已使用"
+      },
+      "service": "服务",
+      "system": "系统"
+    }
+  },
+  "table": {
+    "created_time": "创建时间",
+    "id": "序号",
+    "mark": "备注",
+    "operation": "操作",
+    "updated_time": "更新时间"
+  },
+  "components": {
+    "modelDefinition": {
+      "modelDefinition": "模型定义",
+      "description": "详细描述模型的功能、能力和使用场景，AI润色功能可以帮助优化表达",
+      "aiPolish": "AI润色",
+      "placeholder": "请输入模型的详细定义和能力描述",
+      "supportDescription": "支持详细描述模型的功能特点、应用场景和技术要求",
+      "pleaseInputFirst": "请先输入模型定义内容",
+      "modelOverview": "模型概述",
+      "features": "功能特点",
+      "applicationScenarios": "应用场景",
+      "dataAnalysis": "数据分析和处理",
+      "intelligentDecision": "智能决策支持",
+      "automatedReports": "自动化报告生成",
+      "dataResources": "数据资源",
+      "deepAnalysis": "深度分析",
+      "intelligentProcessing": "智能处理",
+      "analysisReports": "分析报告",
+      "aiPolishSuccess": "AI润色完成，内容已优化",
+      "aiPolishFailed": "AI润色失败",
+      "aiPolishError": "AI润色失败：请重试"
+    },
+    "tableFieldConfig": {
+      "fieldName": "字段名",
+      "fieldType": "类型",
+      "fieldDesc": "描述",
+      "add": "添加",
+      "delete": "删除",
+      "enterFieldName": "请输入字段名",
+      "selectType": "请选择类型",
+      "enterDescription": "请输入描述",
+      "emptyText": "暂无字段配置，点击上方添加按钮添加字段",
+      "fieldTypes": {
+        "string": "字符串",
+        "number": "数值",
+        "date": "日期",
+        "boolean": "布尔值"
+      }
+    },
+    "markdownEditor": {
+      "documentTemplate": "文档模板",
+      "selectTemplate": "请选择文档模板",
+      "markdownEditor": "Markdown编辑器",
+      "edit": "编辑",
+      "preview": "预览",
+      "split": "分屏",
+      "markdownSupport": "支持Markdown语法",
+      "enterMarkdownContent": "请输入Markdown内容...",
+      "noContent": "暂无内容",
+      "renderError": "Markdown渲染错误",
+      "renderErrorMsg": "内容渲染出错，请检查Markdown语法",
+      "standardReport": "标准报告",
+      "simpleReport": "简洁报告",
+      "detailedReport": "详细分析",
+      "customReport": "自定义"
+    },
+    "dataPermissionConfig": {
+      "noPermissionsSelected": "未选择任何数据权限",
+      "clickToConfigure": "点击下方按钮配置数据访问权限",
+      "configureDataPermission": "配置数据权限",
+      "dataPermissionConfig": "数据权限配置",
+      "searchPermission": "搜索权限名称或描述...",
+      "filterPermissionType": "筛选权限类型",
+      "allTypes": "全部类型",
+      "timeRange": "时间范围",
+      "userScope": "用户范围",
+      "ipRange": "IP范围",
+      "dataScope": "数据范围",
+      "fieldLevel": "字段级别",
+      "viewDetailConfig": "查看详细配置",
+      "cancel": "取消",
+      "confirmSelection": "确认选择",
+      "permissionDetail": "权限详情",
+      "detailConfig": "详细配置",
+      "permissionId": "权限ID",
+      "createdTime": "创建时间",
+      "status": "状态",
+      "enabled": "启用",
+      "disabled": "禁用",
+      "typeLabels": {
+        "time_range": "时间范围",
+        "user_scope": "用户范围",
+        "ip_range": "IP范围",
+        "data_scope": "数据范围",
+        "field_level": "字段级别",
+        "custom": "自定义"
+      },
+      "preview": {
+        "workTime": "工作时间",
+        "workdays": "工作日",
+        "notSet": "未设置",
+        "allowedUsers": "允许用户",
+        "allowedDepartments": "允许部门",
+        "allowedIPs": "允许IP",
+        "vpnAccess": "VPN访问",
+        "allow": "允许",
+        "deny": "禁止",
+        "maxRows": "最大行数",
+        "unlimited": "未限制",
+        "allowedDatabases": "允许数据库",
+        "allowedFields": "允许字段",
+        "blockedFields": "屏蔽字段",
+        "customRules": "自定义规则",
+        "approvalRequired": "需要审批",
+        "yes": "是",
+        "no": "否",
+        "unitCount": "个",
+        "unitDay": "天",
+        "unitRule": "条"
+      }
+    }
+  },
+  "preferences": {
+    "copyPreferencesSuccessTitle": "复制偏好设置成功"
+  }
+}

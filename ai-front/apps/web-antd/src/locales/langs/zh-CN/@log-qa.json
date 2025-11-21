@@ -1,0 +1,15 @@
+{
+  "title": "问答日志",
+  "sessionId": "会话ID",
+  "userId": "用户ID",
+  "role": "角色",
+  "username": "用户名",
+  "nickname": "昵称",
+  "content": "内容",
+  "isInterrupted": "是否中断",
+  "createdTime": "创建时间",
+  "updatedTime": "更新时间",
+  "generatedFile": "生成文件",
+  "sessionDetails": "会话详情",
+  "none": "无"
+}

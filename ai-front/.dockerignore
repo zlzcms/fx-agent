@@ -1,0 +1,59 @@
+# 依赖目录
+**/node_modules
+**/dist
+**/.turbo
+
+# 版本控制
+.git
+.gitignore
+.gitattributes
+.gitconfig
+
+# 文档文件
+*.md
+README*
+CHANGELOG*
+LICENSE*
+
+# 开发工具配置
+.vscode/
+.idea/
+.claude/
+.codebuddy/
+
+# 构建产物
+dist.zip
+build-log.txt
+
+# 测试和分析
+**/*.test.*
+**/*.spec.*
+coverage/
+.nyc_output/
+
+# 临时文件
+*.tmp
+*.temp
+*.log
+.DS_Store
+Thumbs.db
+
+# 环境配置（保留必要的）
+.env.local
+.env.*.local
+
+# 编辑器配置
+.editorconfig
+.prettierrc*
+.eslintrc*
+stylelint.config.*
+
+# 其他配置文件
+.browserslistrc
+.commitlintrc.js
+.lintstagedrc.mjs
+lefthook.yml
+vitest.config.ts
+vitest.workspace.ts
+vben-admin.code-workspace
+cspell.json
