@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI助手报告生成通知</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 24px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .content {
+            padding: 24px 0;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            padding: 12px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #333;
+            min-width: 100px;
+            margin-right: 12px;
+        }
+
+        .info-value {
+            color: #555;
+            flex: 1;
+        }
+
+        .report-id {
+            font-family: 'Courier New', monospace;
+            background-color: #e6f7ff;
+            color: #1890ff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .time-badge {
+            background-color: #f6ffed;
+            color: #52c41a;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .success-icon {
+            color: #52c41a;
+            font-size: 18px;
+            margin-right: 8px;
+        }
+
+        .footer {
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e8e8e8;
+        }
+
+        .tips {
+            background-color: #fff7e6;
+            border-left: 4px solid #faad14;
+            padding: 12px 16px;
+            margin: 16px 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .tips-text {
+            font-size: 14px;
+            color: #d46b08;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <table width="100%" cellpadding="0" cellspacing="0" bgcolor="#f5f7fa">
+        <tr>
+            <td align="center" style="padding: 40px 0;">
+                <div class="container">
+                    <div class="header">
+                        <h1 class="title">
+                            <span class="success-icon">✅</span>
+                            AI助手报告生成完成
+                        </h1>
+                        <p class="subtitle">您订阅的AI助手已成功生成新的分析报告</p>
+                    </div>
+
+                    <div class="content">
+                        <div class="info-item">
+                            <span class="info-label">订阅名称：</span>
+                            <span class="info-value">{{subscription_name}}</span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">AI助手：</span>
+                            <span class="info-value">{{assistant_name}}</span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">报告ID：</span>
+                            <span class="info-value">
+                                <span class="report-id">{{report_id}}</span>
+                            </span>
+                        </div>
+
+                        <div class="info-item">
+                            <span class="info-label">生成时间：</span>
+                            <span class="info-value">
+                                <span class="time-badge">{{generated_time}}</span>
+                            </span>
+                        </div>
+
+                        <div class="tips">
+                            <p class="tips-text">
+                                💡 您可以登录系统查看完整的分析报告详情。报告包含了最新的数据分析结果和AI助手的专业见解。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="footer">
+                        本邮件发送给：{{recipients}}<br>
+                        如果这不是您期望的通知，请联系系统管理员。<br>
+                        本邮件由系统自动发送，请勿直接回复。
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

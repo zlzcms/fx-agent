@@ -1,0 +1,6 @@
+# LangChain相关依赖
+langchain>=0.1.0
+langchain-openai>=0.1.0
+langchain-community>=0.1.0
+tiktoken>=0.5.0  # 用于token计数
+openai>=1.0.0  # OpenAI API客户端

@@ -1,0 +1,110 @@
+services:
+  fba_server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - SERVER_TYPE=fastapi_server
+    image: fba_server:${BUILD_NUMBER:-latest}
+    container_name: fba_server
+    restart: always
+    depends_on:
+      - fba_postgres
+      - fba_redis
+      # - fba_rabbitmq  # 已屏蔽rabbitmq依赖
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/.env.production:/fba/backend/.env
+      - ./backend/static:/fba/backend/static
+      - fba_static_upload:/fba/backend/static/upload
+      - .:/fba
+    networks:
+      - fba_network
+
+
+  # PostgreSQL数据库
+  fba_postgres:
+    image: postgres:16
+    ports:
+      - "${DOCKER_POSTGRES_MAP_PORT:-5432}:5432"
+    container_name: fba_postgres
+    restart: always
+    environment:
+      TZ: Asia/Shanghai
+      POSTGRES_DB: fba
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: jHKsp_6eDj131414
+    volumes:
+      - fba_postgres:/var/lib/postgresql/data
+    networks:
+      - fba_network
+
+  # Redis缓存
+  fba_redis:
+    image: redis:latest
+    ports:
+      - "${DOCKER_REDIS_MAP_PORT:-6379}:6379"
+    container_name: fba_redis
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - fba_redis:/data
+    networks:
+      - fba_network
+
+  # RabbitMQ消息队列 - 已屏蔽，现在使用Redis作为消息代理
+  # fba_rabbitmq:
+  #   hostname: fba_rabbitmq
+  #   image: rabbitmq:3.13-management
+  #   ports:
+  #     - "15672:15672"
+  #     - "5672:5672"
+  #   container_name: fba_rabbitmq
+  #   restart: always
+  #   environment:
+  #     - RABBITMQ_DEFAULT_USER=guest
+  #     - RABBITMQ_DEFAULT_PASS=guest
+  #   volumes:
+  #     - fba_rabbitmq:/var/lib/rabbitmq
+  #   networks:
+  #     - fba_network
+
+  # Celery工作进程
+  fba_celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - SERVER_TYPE=celery
+    image: fba_celery:${BUILD_NUMBER:-latest}
+    ports:
+      - "8555:8555"
+    container_name: fba_celery
+    restart: always
+    depends_on:
+      - fba_redis
+      # - fba_rabbitmq  # 已屏蔽rabbitmq依赖，现在使用Redis
+    volumes:
+      - ./backend/.env.production:/fba/backend/.env
+      - .:/fba
+    networks:
+      - fba_network
+
+# 将external修改为false，让docker-compose自动管理网络和卷
+networks:
+  fba_network:
+    external: true
+
+volumes:
+  fba_postgres:
+    external: true
+  fba_redis:
+    external: true
+  fba_static:
+    external: true
+  fba_static_upload:
+    external: true
+  # fba_rabbitmq:  # 已屏蔽rabbitmq卷
+  #   external: true

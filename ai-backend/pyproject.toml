@@ -1,0 +1,133 @@
+[project]
+name = "fastapi_best_architecture"
+version = "0.0.1"
+description = """
+A RBAC (Role-Based Access Control) permission control system built on FastAPI, featuring a unique pseudo-three-tier
+architecture design, with built-in basic implementation of fastapi admin as a template library, free and open-source.
+"""
+authors = [
+    { name = "Wu Clan", email = "jianhengwu0407@gmail.com" },
+]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = [
+    "aiofiles>=24.1.0",
+    "aiosmtplib>=2.0.0",
+    "alembic==1.16.5",
+    "anyio>=4.0.0",
+    "asgi-correlation-id>=4.3.3",
+    "asgiref>=3.9.0",
+    "asyncmy>=0.2.10",
+    "asyncpg>=0.30.0",
+    "bcrypt>=4.2.1",
+    "cappa>=0.28.0",
+    "celery>=5.5.3",
+    # When celery version < 6.0.0
+    # https://github.com/celery/celery/issues/7874
+    "celery-aio-pool>=0.1.0rc8",
+    "cryptography>=45.0.5",
+    "dulwich>=0.24.1",
+    "fast-captcha>=0.3.2",
+    "fastapi-limiter>=0.1.6",
+    "fastapi-oauth20>=0.0.1",
+    "fastapi-pagination==0.14.0",
+    "fastapi[standard-no-fastapi-cloud-cli]>=0.116.0",
+    "flower>=2.0.0",
+    "gevent==25.8.2",
+    "granian>=2.4.2",
+    "httpx>=0.27.0",
+    "ip2loc>=1.0.0",
+    "itsdangerous>=2.2.0",
+    "jinja2>=3.1.4",
+    "langchain>=1.0.0",
+    "langchain-community>=0.4.0",
+    "langchain-core>=1.0.0",
+    "langchain-openai>=1.0.0",
+    "langchain-text-splitters>=1.0.0",
+    "langgraph>=1.0.0",
+    "loguru>=0.7.3",
+    "msgspec>=0.19.0",
+    "numpy>=2.0.0",
+    "packaging>=24.0",
+    "pandas>=2.2.0",
+    "passlib[bcrypt]>=1.7.4",
+    "psutil>=7.0.0",
+    "psycopg2-binary>=2.9.0",
+    "pwdlib>=0.2.1",
+    "pydantic>=2.11.0",
+    "pydantic-core>=2.30.0",
+    "pydantic-settings>=2.10.0",
+    "pyjwt>=2.10.1",
+    "pymysql>=1.1.1",
+    "python-dateutil>=2.8.0",
+    "python-dotenv>=1.0.0",
+    "python-jose>=3.5.0",
+    "python-socketio>=5.12.0",
+    "pyyaml>=6.0",
+    "redis[hiredis]>=6.2.0",
+    "rich>=13.0.0",
+    "rtoml>=0.12.0",
+    "sqlalchemy-crud-plus>=1.10.0",
+    "sqlalchemy[asyncio]>=2.0.44",
+    "sqlparse>=0.5.3",
+    "starlette>=0.46.0",
+    "typing-extensions>=4.0.0",
+    "user-agents>=2.2.0",
+    "uvicorn>=0.30.0",
+    "watchfiles>=0.20.0",
+    "weasyprint>=66.0",
+]
+
+[dependency-groups]
+dev = [
+    "deptry>=0.23.1",
+    "pytest>=8.0.0",
+    "pytest-sugar==1.1.1",
+]
+lint = [
+    "pre-commit==4.3.0",
+    "commitizen>=3.13.0",
+]
+server = [
+    "aio-pika>=9.4.3",
+    "wait-for-it>=2.2.2",
+]
+
+[tool.uv]
+python-downloads = "manual"
+default-groups = ["dev", "lint", "server"]
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.0.1"
+tag_format = "v$version"
+version_files = [
+    "pyproject.toml:version"
+]
+update_changelog_on_bump = true
+
+[tool.deptry]
+exclude = [".venv"]
+
+[tool.deptry.per_rule_ignores]
+DEP001 = ["data_export_tool"]
+DEP002 = ["asyncmy", "asyncpg", "psycopg2-binary", "pymysql", "flower", "gevent"]
+DEP003 = ["aiohttp"]
+DEP004 = ["pytest"]
+
+[tool.deptry.package_module_name_map]
+"aio-pika" = ["aio_pika"]
+"wait-for-it" = ["wait_for_it"]
+
+[[tool.uv.index]]
+name = "aliyun"
+url = "https://mirrors.aliyun.com/pypi/simple"
+
+[[tool.uv.index]]
+name = "tsinghua"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+
+[[tool.uv.index]]
+name = "douban"
+url = "https://pypi.douban.com/simple"

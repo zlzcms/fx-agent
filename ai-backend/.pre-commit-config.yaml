@@ -1,0 +1,52 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-yaml
+      - id: check-toml
+      - id: trailing-whitespace    # 移除行尾空格
+      - id: end-of-file-fixer     # 确保文件以换行符结尾
+      - id: check-merge-conflict  # 检查合并冲突标记
+      - id: check-added-large-files # 防止提交大文件
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.12.10
+    hooks:
+      - id: ruff
+        args:
+          - '--config'
+          - 'backend/.ruff.toml'
+          - '--fix'
+      - id: ruff-format
+        args:
+          - '--config'
+          - 'backend/.ruff.toml'
+
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v3.29.1
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]
+
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.8.10
+    hooks:
+      - id: uv-lock
+
+  # 数据库迁移和序列修复
+  - repo: local
+    hooks:
+      - id: db-migration
+        name: 数据库迁移检查
+        entry: python3 scripts/dev/pre-commit-db-migration.py
+        language: system
+        pass_filenames: false
+        files: '^(backend/.*\.py|backend/alembic/.*)$'
+        stages: [pre-commit]
+      - id: fix-sequences
+        name: 数据库序列修复
+        entry: python3 scripts/dev/pre-commit-fix-sequences.py
+        language: system
+        pass_filenames: false
+        files: '^(backend/.*\.py|backend/alembic/.*)$'
+        stages: [pre-commit]

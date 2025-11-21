@@ -1,0 +1,27 @@
+.idea/
+.vscode/
+.cursor/
+.DS_Store
+venv/
+.venv/
+.python-version
+.ruff_cache/
+.pytest_cache/
+backend/agents/static/
+__pycache__/
+.env
+backend/log/
+backend/logs/
+*.log
+celerybeat-schedule.*
+/backend/agents/static/
+/tests/*
+/backend/agents/tests/*
+celerybeat*
+# 忽略docs文件夹但允许特定的markdown文件
+docs/*
+!docs/*.md
+tests/
+backend/agents/docs/*
+backend/agents/examples/*
+backend/.env*

@@ -1,0 +1,110 @@
+line-length = 120
+cache-dir = ".ruff_cache"
+target-version = "py310"
+# 🚨 关键修复：禁用危险的全局unsafe-fixes
+unsafe-fixes = false
+show-fixes = true
+
+[lint]
+select = [
+    "E",
+    "F",
+    "I",
+    "TC",
+    # W
+    "W505",
+    # PT
+    "PT018",
+    # SIM
+    "SIM101",
+    "SIM114",
+    # PGH
+    "PGH004",
+    # PL
+    "PLE1142",
+    # RUF
+    "RUF100",
+    # UP
+    "UP007"
+]
+# 🚨 关键修复：禁用不稳定的preview特性
+preview = false
+ignore = [
+    "FURB101",
+    "E501",     # line too long (由formatter处理)
+    "E712",     # 🚨 关键：避免将 == False/True 转换为 not/bool()，SQLAlchemy需要显式比较
+    "UP007",    # 静默 Optional[T] -> T | None 建议（保持SQLAlchemy兼容性）
+]
+
+# 🔧 新增：控制自动修复的范围
+fixable = [
+    "F401",   # 移除未使用的导入（安全）
+    "I001",   # 修复导入排序（安全）
+    "W292",   # 文件末尾换行（安全）
+    "W291",   # 移除行尾空格（安全）
+]
+
+# 🚫 禁止危险的自动修复
+unfixable = [
+    "E712",   # 永远不要自动修复布尔比较
+    "SIM",    # 简化规则可能改变逻辑
+    "UP",     # 升级规则可能破坏兼容性
+    "UP007",  # 特别禁止 Optional[T] -> T | None 转换
+]
+
+[lint.flake8-pytest-style]
+mark-parentheses = false
+parametrize-names-type = "list"
+parametrize-values-row-type = "list"
+parametrize-values-type = "tuple"
+
+[lint.flake8-unused-arguments]
+ignore-variadic-names = true
+
+# 🔧 SQLAlchemy专用配置：关键的兼容性设置
+[lint.flake8-type-checking]
+runtime-evaluated-base-classes = [
+    "sqlalchemy.orm.DeclarativeBase",
+    "sqlalchemy.ext.declarative.declarative_base",
+    "backend.common.model.Base",  # 项目的基础模型类
+    "backend.common.model.MappedBase"
+]
+
+runtime-evaluated-decorators = [
+    "sqlalchemy.orm.declarative.declarative_base"
+]
+
+[lint.isort]
+lines-between-types = 1
+order-by-type = true
+# SQLAlchemy项目的导入分组
+known-first-party = ["backend"]
+
+[lint.per-file-ignores]
+# API路由文件：放宽类型检查
+"**/api/v1/*.py" = ["TC"]
+
+# 🔧 SQLAlchemy模型文件：重要的兼容性设置
+"**/model/*.py" = [
+    "TC003",   # Move stdlib import into TYPE_CHECKING block
+    "TC004",   # Move import out of TYPE_CHECKING block (SQLAlchemy关系需要运行时导入)
+    "UP037",   # Remove quotes from type annotation (SQLAlchemy需要引用)
+]
+
+# 模型初始化文件：允许未使用的导入
+"**/model/__init__.py" = ["F401"]
+
+# CRUD文件：SQLAlchemy相关的类型检查放宽
+"**/crud/*.py" = ["TCH001", "TCH002"]
+
+# 测试文件：放宽导入顺序
+"**/tests/*.py" = ["E402"]
+
+[format]
+# 🚨 关键修复：禁用不稳定的preview特性
+preview = false
+quote-style = "double"
+docstring-code-format = true
+skip-magic-trailing-comma = false
+# 保持与Black兼容
+indent-style = "space"
