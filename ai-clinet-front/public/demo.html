@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>John Mock-Doe 风控洞察面板</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" />
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      --bg: #f5f7fb;
+      --card-bg: #ffffff;
+      --border: #e1e6f0;
+      --primary: #2563eb;
+      --danger: #f87171;
+      --warning: #fbbf24;
+      --success: #34d399;
+      --text: #0f172a;
+      --muted: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      color: #fff;
+      padding: 48px 24px 120px;
+    }
+
+    header .meta {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: flex-end;
+    }
+
+    header .meta h1 {
+      margin: 0;
+      font-size: 32px;
+      letter-spacing: 0.4px;
+    }
+
+    header .meta p {
+      margin: 8px 0 0;
+      color: rgba(248, 250, 252, 0.75);
+      font-size: 14px;
+    }
+
+    .badges {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      backdrop-filter: blur(8px);
+    }
+
+    .badge.danger {
+      background: rgba(248, 113, 113, 0.15);
+      color: #fecaca;
+    }
+
+    .badge.warning {
+      background: rgba(251, 191, 36, 0.15);
+      color: #fde68a;
+    }
+
+    .badge.success {
+      background: rgba(52, 211, 153, 0.15);
+      color: #bbf7d0;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: -80px auto 60px;
+      padding: 0 24px 24px;
+      display: grid;
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 24px 45px -24px rgba(15, 23, 42, 0.25);
+      border: 1px solid rgba(15, 23, 42, 0.05);
+    }
+
+    .grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .section-title h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title .controls {
+      display: flex;
+      gap: 10px;
+    }
+
+    .pill {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .pill:hover,
+    .pill.active {
+      border-color: var(--primary);
+      color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .stat-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
+    }
+
+    .stat-card {
+      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(248, 250, 255, 0.9), rgba(255, 255, 255, 0.9));
+    }
+
+    .stat-card .label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .stat-card .value {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .stat-card .sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .info-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed rgba(148, 163, 184, 0.35);
+    }
+
+    .info-item:last-child {
+      border-bottom: none;
+    }
+
+    .info-item span:first-child {
+      color: var(--muted);
+      font-size: 13px;
+      min-width: 120px;
+    }
+
+    .info-item span:last-child {
+      font-weight: 600;
+    }
+
+    .risk-badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .risk-badge {
+      padding: 8px 14px;
+      border-radius: 14px;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .risk-badge.high {
+      background: rgba(248, 113, 113, 0.12);
+      color: #b91c1c;
+    }
+
+    .risk-badge.medium {
+      background: rgba(251, 191, 36, 0.12);
+      color: #b45309;
+    }
+
+    .risk-badge.low {
+      background: rgba(16, 185, 129, 0.12);
+      color: #047857;
+    }
+
+    .chart {
+      width: 100%;
+      height: 320px;
+    }
+
+    .chart.tight {
+      height: 260px;
+    }
+
+    .dual-column {
+      display: grid;
+      gap: 18px;
+    }
+
+    .dual-column > * {
+      background: linear-gradient(135deg, rgba(226, 232, 240, 0.15), rgba(255, 255, 255, 0.65));
+      border-radius: 16px;
+      padding: 18px;
+      border: 1px solid rgba(226, 232, 240, 0.5);
+    }
+
+    .tag-list {
+      padding-left: 18px;
+      margin: 12px 0;
+      color: var(--muted);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      background: rgba(248, 250, 255, 0.4);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    table thead {
+      background: rgba(37, 99, 235, 0.12);
+    }
+
+    table th,
+    table td {
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+    }
+
+    table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .accordion {
+      display: grid;
+      gap: 12px;
+    }
+
+    .accordion-item {
+      border-radius: 14px;
+      border: 1px solid rgba(226, 232, 240, 0.7);
+      background: rgba(248, 250, 255, 0.6);
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding: 0 18px;
+    }
+
+    .accordion-item.open .accordion-body {
+      padding: 12px 18px 18px;
+      max-height: 400px;
+    }
+
+    .accordion-item.open .accordion-header i {
+      transform: rotate(180deg);
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      padding: 24px 0 12px;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 36px 18px 120px;
+      }
+      main {
+        margin-top: -90px;
+        padding: 0 16px 16px;
+      }
+      .card {
+        padding: 20px;
+      }
+      .chart {
+        height: 260px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="meta">
+      <div>
+        <h1>客户综合风险面板</h1>
+        <p>John Mock-Doe（ID: 1943） · 分析周期：最近 30 天（截至 2025-11-13）</p>
+      </div>
+      <div class="badges">
+        <span class="badge danger"><i class="ri-alert-fill"></i> 风险等级：中高风险</span>
+        <span class="badge warning"><i class="ri-flag-2-fill"></i> 结构化交易预警</span>
+        <span class="badge success"><i class="ri-shield-check-fill"></i> KYC 已通过</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <div class="section-title">
+        <h2><i class="ri-user-3-line"></i> 客户概况</h2>
+        <div class="controls">
+          <span class="pill active">30 日视图</span>
+          <span class="pill" id="customRange">自定义周期</span>
+        </div>
+      </div>
+      <div class="stat-cards">
+        <div class="stat-card">
+          <div class="label">自动风险评分</div>
+          <div class="value" style="color: var(--danger)">78 / 100</div>
+          <div class="sub">⚠️ 超过 70 属于高关注区间</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">登录次数</div>
+          <div class="value">318 次</div>
+          <div class="sub">平均每天 10.6 次</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">资金流入笔数</div>
+          <div class="value">290 笔</div>
+          <div class="sub" style="color: var(--danger)">0 笔资金流出</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">登录地区</div>
+          <div class="value">6 个地区</div>
+          <div class="sub">跨境登录行为显著</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid two">
+      <article class="card">
+        <div class="section-title">
+          <h2><i class="ri-id-card-line"></i> 基本信息</h2>
+        </div>
+        <ul class="info-list">
+          <li class="info-item"><span>客户姓名</span><span>John Mock-Doe</span></li>
+          <li class="info-item"><span>客户邮箱</span><span>96104@max111.com</span></li>
+          <li class="info-item"><span>注册时间</span><span>2025-01-28</span></li>
+          <li class="info-item"><span>注册国家</span><span>中国</span></li>
+          <li class="info-item"><span>账户国家</span><span style="color: var(--danger)">阿尔巴尼亚 · ⚠️ 不一致</span></li>
+          <li class="info-item"><span>用户类型</span><span>直接客户</span></li>
+          <li class="info-item"><span>KYC 状态</span><span>已通过（状态 9）</span></li>
+          <li class="info-item"><span>账户状态</span><span>正常</span></li>
+        </ul>
+      </article>
+      <article class="card">
+        <div class="section-title">
+          <h2><i class="ri-shield-line"></i> 风险重点</h2>
+        </div>
+        <div class="risk-badges">
+          <span class="risk-badge high"><i class="ri-error-warning-fill"></i> 纯入金无出金</span>
+          <span class="risk-badge high"><i class="ri-exchange-dollar-line"></i> 高频小额内部转账</span>
+          <span class="risk-badge high"><i class="ri-map-pin-fill"></i> 地域信息不一致</span>
+          <span class="risk-badge medium"><i class="ri-profile-line"></i> 认证状态未完全</span>
+          <span class="risk-badge medium"><i class="ri-device-line"></i> 登录设备多样</span>
+        </div>
+        <p style="margin-top: 18px; font-size: 13px; color: var(--muted); line-height: 1.6">
+          该客户存在持续性的资金沉淀与跨境登录行为，需重点关注其资金去向与业务真实性。
+        </p>
+      </article>
+    </section>
+
+    <section class="card">
+      <div class="section-title">
+        <h2><i class="ri-bar-chart-line"></i> 资金活动分析</h2>
+        <div class="controls">
+          <span class="pill active">入 / 出金对比</span>
+          <span class="pill" id="toggleCurrency">币种分布</span>
+        </div>
+      </div>
+      <div class="grid two">
+        <div>
+          <div id="fundFlowChart" class="chart"></div>
+          <p style="font-size: 12px; color: var(--muted); margin-top: 12px">
+            📌 连续 5 日保持 38-45 笔入金，未出现任何出金记录，符合结构化交易特征。
+          </p>
+        </div>
+        <div class="dual-column">
+          <div>
+            <strong style="display: block; margin-bottom: 8px">高风险发现</strong>
+            <ul class="tag-list">
+              <li>290 笔记录均为内部渠道 InvestInternal</li>
+              <li>单笔金额集中在 0.01 - 4.01 美元，平均 0.27 美元</li>
+              <li>涉及多币种（USD / JPY / GBP），存在套利可能</li>
+            </ul>
+          </div>
+          <div id="fundCurrencyChart" class="chart tight"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid two">
+      <article class="card">
+        <div class="section-title">
+          <h2><i class="ri-time-line"></i> 交易行为分析</h2>
+        </div>
+        <div id="tradeTimeChart" class="chart"></div>
+        <ul class="tag-list">
+          <li>无 MT4 / MT5 直接交易记录，佣金全部来自 CommissionWalletInternal</li>
+          <li>交易集中于整点分钟段（xx:03），高度自动化特征</li>
+          <li>疑似 IB 或跟单模式，建议核查关联账户关系</li>
+        </ul>
+      </article>
+      <article class="card">
+        <div class="section-title">
+          <h2><i class="ri-earth-line"></i> 登录行为分析</h2>
+        </div>
+        <div id="loginLocationChart" class="chart"></div>
+        <p style="font-size: 13px; color: var(--muted); margin-top: 12px">
+          近期登录地点涉及中国、香港、新加坡、美国、日本、澳大利亚等地区，伴随设备多样性，可能为跨境团队操控。
+        </p>
+      </article>
+    </section>
+
+    <section class="card">
+      <div class="section-title">
+        <h2><i class="ri-radar-line"></i> 风险因素总览</h2>
+      </div>
+      <div class="grid two">
+        <div id="riskFactorChart" class="chart"></div>
+        <div class="dual-column">
+          <div>
+            <strong style="display: block; margin-bottom: 8px">高风险项目</strong>
+            <table>
+              <thead>
+                <tr>
+                  <th>风险类别</th>
+                  <th>风险程度</th>
+                  <th>具体发现</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>AML 风险</td>
+                  <td style="color: var(--danger); font-weight: 600">高</td>
+                  <td>高频小额内部转账，结构性交易</td>
+                </tr>
+                <tr>
+                  <td>资金活动风险</td>
+                  <td style="color: var(--danger); font-weight: 600">高</td>
+                  <td>纯入金无出金，异常资金沉淀</td>
+                </tr>
+                <tr>
+                  <td>地域风险</td>
+                  <td style="color: var(--danger); font-weight: 600">高</td>
+                  <td>注册信息与登录行为严重不一致</td>
+                </tr>
+                <tr>
+                  <td>业务真实性</td>
+                  <td style="color: var(--danger); font-weight: 600">高</td>
+                  <td>无法验证实际交易活动</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <strong style="display: block; margin-bottom: 8px">中低风险要素</strong>
+            <ul class="tag-list">
+              <li>登录行为异常（多地区频繁登录）</li>
+              <li>设备使用多样性</li>
+              <li>KYC 认证不完整</li>
+              <li>基础 KYC 通过，账户状态正常</li>
+              <li>无登录错误记录</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-title">
+        <h2><i class="ri-todo-line"></i> 风控建议与合规措施</h2>
+      </div>
+      <div class="accordion">
+        <div class="accordion-item open">
+          <div class="accordion-header">
+            <span>🚨 立即措施</span>
+            <i class="ri-arrow-down-s-line"></i>
+          </div>
+          <div class="accordion-body">
+            <ul class="tag-list">
+              <li>启动 AML 深度调查并冻结可疑资金流动</li>
+              <li>要求客户提供佣金来源及业务真实性材料</li>
+              <li>暂停新入金，设置单日交易次数限制</li>
+              <li>限制跨境登录访问，强化风控拦截</li>
+              <li>准备可疑活动报告（SAR），向监管报备</li>
+            </ul>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span>⚠️ 短期措施（1-2 周）</span>
+            <i class="ri-arrow-down-s-line"></i>
+          </div>
+          <div class="accordion-body">
+            <ul class="tag-list">
+              <li>进行增强型尽职调查（EDD），核验交易账户</li>
+              <li>核查介绍经纪人关系及关联账户资金流动</li>
+              <li>要求客户补充认证文件与地址证明</li>
+              <li>验证 IB 或跟单业务真实性</li>
+            </ul>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span>📊 长期监控</span>
+            <i class="ri-arrow-down-s-line"></i>
+          </div>
+          <div class="accordion-body">
+            <ul class="tag-list">
+              <li>将账户标记为最高风险级别并实施实时监控</li>
+              <li>建立异常模式预警机制与结构性交易检测算法</li>
+              <li>加强地域风险评分模型及客户画像系统</li>
+            </ul>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span>📑 监管合规性</span>
+            <i class="ri-arrow-down-s-line"></i>
+          </div>
+          <div class="accordion-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>监管机构</th>
+                  <th>符合状态</th>
+                  <th>主要问题</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>FCA</td>
+                  <td style="color: var(--danger); font-weight: 600">❌ 不符合</td>
+                  <td>可疑资金模式需立即报告</td>
+                </tr>
+                <tr>
+                  <td>ASIC</td>
+                  <td style="color: var(--danger); font-weight: 600">❌ 不符合</td>
+                  <td>AML 监控不足，需加强</td>
+                </tr>
+                <tr>
+                  <td>NFA</td>
+                  <td style="color: var(--danger); font-weight: 600">❌ 不符合</td>
+                  <td>客户身份验证不完整</td>
+                </tr>
+                <tr>
+                  <td>CYSEC</td>
+                  <td style="color: var(--danger); font-weight: 600">❌ 不符合</td>
+                  <td>高风险客户监控不足</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-title">
+        <h2><i class="ri-speed-up-line"></i> 综合风险评分</h2>
+        <div class="controls">
+          <span class="pill active">Gauge</span>
+          <span class="pill" id="radarToggle">Radar</span>
+        </div>
+      </div>
+      <div id="riskGaugeChart" class="chart"></div>
+      <p style="font-size: 13px; color: var(--muted); margin-top: 12px">
+        当前综合评分为 78，处于中高风险区间，若后续资金活动持续异常，评分有进一步上升的趋势。
+      </p>
+    </section>
+
+    <section class="card">
+      <div class="section-title">
+        <h2><i class="ri-checkbox-circle-line"></i> 风控结论</h2>
+      </div>
+      <ul class="tag-list">
+        <li>AML 风险：高频小额资金模式符合结构性交易特征，需立即调查。</li>
+        <li>资金活动：纯入金无出金，重大资金沉淀风险。</li>
+        <li>地域信息：注册信息与实际登录与账户国家严重不符。</li>
+        <li>业务真实性：佣金来源高度依赖内部转账，缺乏实际交易支撑。</li>
+      </ul>
+      <p style="font-size: 13px; color: var(--muted); margin-top: 12px">
+        建议立即采取限制措施并进行深入 AML 调查，如确认异常情况，应按监管要求提交可疑活动报告。
+      </p>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 18px; font-size: 12px; color: var(--muted)">
+        <span>报告生成时间：2025-11-13 18:42:22</span>
+        <span>分析师：外汇金融风控系统</span>
+        <span>下一次评估：立即重新评估（发现重大风险）</span>
+        <span>监控级别：最高级别监控</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">本报告基于系统数据分析生成，建议结合人工审核验证相关风险点。</footer>
+
+  <script>
+    const accordionItems = document.querySelectorAll('.accordion-item');
+    accordionItems.forEach((item) => {
+      const header = item.querySelector('.accordion-header');
+      header.addEventListener('click', () => {
+        item.classList.toggle('open');
+      });
+    });
+
+    function initFundFlowChart() {
+      const chart = echarts.init(document.getElementById('fundFlowChart'));
+      chart.setOption({
+        tooltip: { trigger: 'axis' },
+        legend: { data: ['入金笔数', '出金笔数'] },
+        grid: { left: 60, right: 20, top: 40, bottom: 40 },
+        xAxis: {
+          type: 'category',
+          data: ['11-09', '11-10', '11-11', '11-12', '11-13'],
+          axisTick: { alignWithLabel: true },
+        },
+        yAxis: {
+          type: 'value',
+          name: '交易笔数',
+        },
+        series: [
+          {
+            name: '入金笔数',
+            type: 'bar',
+            data: [45, 42, 38, 40, 43],
+            itemStyle: { color: '#60a5fa' },
+            emphasis: { focus: 'series' },
+          },
+          {
+            name: '出金笔数',
+            type: 'bar',
+            data: [0, 0, 0, 0, 0],
+            itemStyle: { color: '#f87171' },
+          },
+        ],
+      });
+      return chart;
+    }
+
+    function initFundCurrencyChart() {
+      const chart = echarts.init(document.getElementById('fundCurrencyChart'));
+      chart.setOption({
+        tooltip: { trigger: 'item' },
+        title: { text: '内部转账币种占比', left: 'center', top: 0, textStyle: { fontSize: 14 } },
+        series: [
+          {
+            type: 'pie',
+            radius: ['35%', '70%'],
+            center: ['50%', '60%'],
+            itemStyle: { borderRadius: 6, borderColor: '#fff', borderWidth: 2 },
+            data: [
+              { value: 62, name: 'USD' },
+              { value: 18, name: 'JPY' },
+              { value: 12, name: 'GBP' },
+              { value: 8, name: '其他' },
+            ],
+          },
+        ],
+      });
+      return chart;
+    }
+
+    function initTradeTimeChart() {
+      const chart = echarts.init(document.getElementById('tradeTimeChart'));
+      chart.setOption({
+        tooltip: { trigger: 'axis' },
+        grid: { left: 60, right: 30, top: 40, bottom: 40 },
+        xAxis: {
+          type: 'category',
+          data: ['16:03', '17:03', '18:03', '19:03', '20:03', '21:03', '22:03'],
+        },
+        yAxis: { type: 'value', name: '交易次数' },
+        series: [
+          {
+            name: '交易次数',
+            type: 'bar',
+            data: [40, 45, 42, 38, 41, 43, 41],
+            itemStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                { offset: 0, color: '#fb923c' },
+                { offset: 1, color: '#f97316' },
+              ]),
+            },
+          },
+        ],
+      });
+      return chart;
+    }
+
+    function initLoginLocationChart() {
+      const chart = echarts.init(document.getElementById('loginLocationChart'));
+      chart.setOption({
+        tooltip: { trigger: 'item' },
+        legend: { orient: 'vertical', left: 0, top: 'center' },
+        series: [
+          {
+            name: '登录次数',
+            type: 'pie',
+            radius: '55%',
+            center: ['65%', '50%'],
+            data: [
+              { value: 265, name: '中国' },
+              { value: 25, name: '香港' },
+              { value: 15, name: '新加坡' },
+              { value: 8, name: '美国' },
+              { value: 5, name: '其他地区' },
+            ],
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)',
+              },
+            },
+          },
+        ],
+      });
+      return chart;
+    }
+
+    function initRiskFactorChart() {
+      const chart = echarts.init(document.getElementById('riskFactorChart'));
+      chart.setOption({
+        tooltip: { trigger: 'item' },
+        legend: { orient: 'vertical', left: 0, top: 'center' },
+        series: [
+          {
+            type: 'pie',
+            radius: ['40%', '65%'],
+            center: ['65%', '50%'],
+            data: [
+              { value: 35, name: 'AML 合规风险' },
+              { value: 25, name: '资金活动异常' },
+              { value: 20, name: '地域不一致风险' },
+              { value: 15, name: '业务真实性风险' },
+              { value: 5, name: '登录行为风险' },
+            ],
+          },
+        ],
+      });
+      return chart;
+    }
+
+    function initRiskGaugeChart() {
+      const chart = echarts.init(document.getElementById('riskGaugeChart'));
+      chart.setOption({
+        tooltip: { formatter: '{a} <br/>{b}: {c}%' },
+        series: [
+          {
+            name: '综合风险',
+            type: 'gauge',
+            min: 0,
+            max: 100,
+            detail: { formatter: '{value}' },
+            axisLine: {
+              lineStyle: {
+                width: 16,
+                color: [
+                  [0.3, '#34d399'],
+                  [0.7, '#fbbf24'],
+                  [1, '#f87171'],
+                ],
+              },
+            },
+            pointer: { length: '70%', width: 6 },
+            data: [{ value: 78, name: '风险评分' }],
+          },
+        ],
+      });
+      return chart;
+    }
+
+    const charts = [
+      initFundFlowChart(),
+      initFundCurrencyChart(),
+      initTradeTimeChart(),
+      initLoginLocationChart(),
+      initRiskFactorChart(),
+      initRiskGaugeChart(),
+    ];
+
+    window.addEventListener('resize', () => {
+      charts.forEach((chart) => chart.resize());
+    });
+
+    document.getElementById('toggleCurrency').addEventListener('click', (e) => {
+      const target = e.target;
+      const fundFlowPill = target.previousElementSibling;
+      if (!target.classList.contains('active')) {
+        target.classList.add('active');
+        fundFlowPill.classList.remove('active');
+        alert('当前仅展示币种占比，可在后续版本添加更多交互。');
+      }
+    });
+  </script>
+</body>
+</html>

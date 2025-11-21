@@ -1,0 +1,73 @@
+{
+  "name": "crm-project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm install && vite",
+    "build": "pnpm install && vite build && vite build --config vite.embed.config.js && cp dist-embed/embed.min.js dist/embed.min.js",
+    "build:embed": "pnpm install && vite build --config vite.embed.config.js",
+    "preview": "vite preview",
+    "lint": "eslint src --ext .vue,.js,.ts --fix",
+    "format": "prettier --write src/**/*.{vue,js,ts,json,css,scss,less}",
+    "prepare": "husky install",
+    "deploy": "pnpm run build && ./scripts/deploy/deploy.sh",
+    "deploy:build": "pnpm run build",
+    "deploy:upload": "./scripts/deploy/deploy.sh"
+  },
+  "dependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
+    "ant-design-vue": "^4.2.6",
+    "ant-design-x-vue": "^1.2.9",
+    "axios": "^1.7.9",
+    "dompurify": "^3.2.6",
+    "echarts": "^6.0.0",
+    "handsontable": "^16.0.1",
+    "html2canvas": "^1.4.1",
+    "jquery": "^3.7.1",
+    "jspdf": "^3.0.3",
+    "luckysheet": "^2.1.13",
+    "marked": "^16.0.0",
+    "mermaid": "^11.12.0",
+    "vue": "^3.5.13",
+    "vue-i18n": "^11.1.9",
+    "vue-router": "^4.5.1",
+    "vuex": "^4.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
+    "@vitejs/plugin-vue": "^5.2.3",
+    "@vitejs/plugin-vue-jsx": "^5.0.1",
+    "@vue/compiler-sfc": "^3.5.17",
+    "@vue/eslint-config-prettier": "^9.0.0",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^8.55.0",
+    "eslint-plugin-vue": "^9.19.2",
+    "husky": "^8.0.3",
+    "less": "^4.3.0",
+    "lint-staged": "^15.2.0",
+    "postcss": "^8.5.6",
+    "prettier": "^3.1.1",
+    "sass": "^1.89.2",
+    "tailwindcss": "^3.4.17",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.3",
+    "unplugin-vue-components": "^28.8.0",
+    "unplugin-vue-macros": "^2.14.5",
+    "vite": "^6.3.5",
+    "vue-tsc": "^2.1.10"
+  },
+  "main": "src/main.js",
+  "lint-staged": {
+    "*.{json,css,scss,less,md}": [
+      "prettier --write"
+    ],
+    ".eslintrc.cjs": [
+      "prettier --write"
+    ],
+    "commitlint.config.cjs": [
+      "prettier --write"
+    ]
+  }
+}

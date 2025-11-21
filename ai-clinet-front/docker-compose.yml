@@ -1,0 +1,25 @@
+services:
+  ai_client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ai_client:${BUILD_NUMBER:-latest}
+    container_name: ai_client
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      # 挂载日志目录
+      - ./logs:/var/log/nginx
+    networks:
+      - fba_network
+    restart: always
+
+networks:
+  fba_network:
+    external: true
+
+volumes:
+  logs:
+    name: ai_client_logs

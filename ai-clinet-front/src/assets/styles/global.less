@@ -1,0 +1,894 @@
+// 全局样式与Vant主题变量覆盖
+:root.light {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+
+  /* Light theme variables */
+  --bg-primary: #ffffff;
+  --bg-secondary: #fafafa;
+  --bg-tertiary: #f5f5f5;
+  --bg-table-header: #dfdfdf;
+  --bg-chat: #fafafa;
+  --text-checked: #000000;
+  --text-primary: #262626;
+  --text-secondary: #656565;
+  --text-tertiary: #8c8c8c;
+  --border-more: #d6d6d6;
+  --border-color: #e8e8e8;
+  --border-light: #e7e7e7;
+  --border-agent: #f2efef;
+  --primary-color: #1890ff;
+  --primary-hover: #40a9ff;
+  --success-color: #52c41a;
+  --error-color: #ff4d4f;
+  --warning-color: #faad14;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --hover-bg: #fff;
+  --active-bg: #e7f3f9;
+  --active-bg2: #fefefe;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  --bg-chain-line: rgba(0, 0, 0, 0.082);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark theme */
+:root.dark {
+  --bg-primary: #000000;
+  --bg-secondary: #343434;
+  --bg-tertiary: #4f4f4f;
+  --bg-table-header: #858585;
+  --bg-chat: #2a2a2a;
+  --text-checked: #ffffff;
+  --text-primary: #efefef;
+  --text-secondary: #cccccc;
+  --text-tertiary: #a0a0a0;
+  --border-more: #323232;
+  --border-color: #404040;
+  --border-light: #555555;
+  --border-agent: #404040;
+  --primary-color: #40a9ff;
+  --primary-hover: #69c0ff;
+  --success-color: #73d13d;
+  --error-color: #ff7875;
+  --warning-color: #ffc53d;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --hover-bg: #454545;
+  --active-bg: rgba(64, 169, 255, 0.1);
+  --active-bg2: rgba(188, 188, 188, 0.1);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  --bg-chain-line: #88868681;
+}
+body {
+  margin: 0;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI Variable Display,
+    Segoe UI,
+    Helvetica,
+    Apple Color Emoji,
+    Arial,
+    sans-serif,
+    Segoe UI Emoji,
+    Segoe UI Symbol;
+  background: #f7f8fa;
+}
+
+// PC端适配样式
+body.pc {
+  // 设置最大宽度，避免在大屏幕上过宽
+  margin: 0 auto;
+}
+body #app {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.header-bar {
+  width: 100%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  background: #fff;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.product-name {
+  font-family: 'MiSans', Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 630;
+  color: #171c27;
+  margin-left: 8px;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.header-right .icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 100px;
+}
+
+.header-menu {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 32px; /* 让菜单整体靠左，与logo有间距 */
+}
+.menu-item {
+  font-family: 'MiSans', Arial, sans-serif;
+  border-radius: 8px;
+  padding: 4px 8px;
+  gap: 4px;
+  font-size: 14px;
+  color: #444b59;
+  cursor: pointer;
+}
+
+.main-container {
+  min-height: 85vh;
+  background: #fff;
+  border-radius: 20px;
+}
+
+.main-content .section-title {
+  font-size: 14px;
+  font-weight: 700;
+  text-align: left;
+  color: #171c27;
+  margin-top: 20px;
+}
+.main-content .subsection-title {
+  font-size: 14px;
+  font-weight: 400;
+  text-align: left;
+  color: #171c27;
+  padding: 0px 15px;
+}
+.main-content .table-container {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #e6e6e6;
+  background-color: #ffffff;
+}
+
+.main-content .charts-container {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  .chart-card {
+    flex: 1;
+    min-width: 300px;
+    padding: 15px 15px 30px 15px;
+    .el-card__body {
+      padding: 0px;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      span {
+        font-size: 14px;
+        color: #1d2129;
+      }
+    }
+    .chart-title {
+      font-size: 16px;
+      color: #1f2f3d;
+      margin-left: 10px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      white-space: nowrap;
+      position: relative;
+      text-align: left;
+    }
+    .chart-title:before {
+      content: '';
+      display: block;
+      top: 1px;
+      border-radius: 10px;
+      background-color: #0ea8e4;
+      width: 5px;
+      height: 20px;
+      position: absolute;
+      top: 3px;
+      left: -12px;
+    }
+  }
+}
+
+// Tailwind CSS 风格的 Flex 布局工具类
+// Flex 容器
+.flex {
+  display: flex;
+}
+.inline-flex {
+  display: inline-flex;
+}
+.flex-row {
+  flex-direction: row;
+}
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+.flex-wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+// Flex 项目
+.flex-1 {
+  flex: 1 1 0%;
+}
+.flex-auto {
+  flex: 1 1 auto;
+}
+.flex-initial {
+  flex: 0 1 auto;
+}
+.flex-none {
+  flex: none;
+}
+.grow {
+  flex-grow: 1;
+}
+.grow-0 {
+  flex-grow: 0;
+}
+.shrink {
+  flex-shrink: 1;
+}
+.shrink-0 {
+  flex-shrink: 0;
+}
+
+// 对齐
+.justify-start {
+  justify-content: flex-start;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.justify-around {
+  justify-content: space-around;
+}
+.justify-evenly {
+  justify-content: space-evenly;
+}
+.items-start {
+  align-items: flex-start;
+}
+.items-end {
+  align-items: flex-end;
+}
+.items-center {
+  align-items: center;
+}
+.items-baseline {
+  align-items: baseline;
+}
+.items-stretch {
+  align-items: stretch;
+}
+
+// 自身对齐
+.self-auto {
+  align-self: auto;
+}
+.self-start {
+  align-self: flex-start;
+}
+.self-end {
+  align-self: flex-end;
+}
+.self-center {
+  align-self: center;
+}
+.self-stretch {
+  align-self: stretch;
+}
+
+// 内容对齐
+.content-center {
+  align-content: center;
+}
+.content-start {
+  align-content: flex-start;
+}
+.content-end {
+  align-content: flex-end;
+}
+.content-between {
+  align-content: space-between;
+}
+.content-around {
+  align-content: space-around;
+}
+.content-evenly {
+  align-content: space-evenly;
+}
+
+// 间距工具类 - Margin
+// margin - all sides
+.m-0 {
+  margin: 0;
+}
+.m-1 {
+  margin: 4px;
+}
+.m-2 {
+  margin: 8px;
+}
+.m-3 {
+  margin: 12px;
+}
+.m-4 {
+  margin: 16px;
+}
+.m-5 {
+  margin: 20px;
+}
+.m-6 {
+  margin: 24px;
+}
+.m-8 {
+  margin: 32px;
+}
+.m-10 {
+  margin: 40px;
+}
+.m-12 {
+  margin: 48px;
+}
+.m-16 {
+  margin: 64px;
+}
+
+// margin-top
+.mt-0 {
+  margin-top: 0;
+}
+.mt-1 {
+  margin-top: 4px;
+}
+.mt-2 {
+  margin-top: 8px;
+}
+.mt-3 {
+  margin-top: 12px;
+}
+.mt-4 {
+  margin-top: 16px;
+}
+.mt-5 {
+  margin-top: 20px;
+}
+.mt-6 {
+  margin-top: 24px;
+}
+.mt-8 {
+  margin-top: 32px;
+}
+.mt-10 {
+  margin-top: 40px;
+}
+.mt-12 {
+  margin-top: 48px;
+}
+.mt-16 {
+  margin-top: 64px;
+}
+
+// margin-right
+.mr-0 {
+  margin-right: 0;
+}
+.mr-1 {
+  margin-right: 4px;
+}
+.mr-2 {
+  margin-right: 8px;
+}
+.mr-3 {
+  margin-right: 12px;
+}
+.mr-4 {
+  margin-right: 16px;
+}
+.mr-5 {
+  margin-right: 20px;
+}
+.mr-6 {
+  margin-right: 24px;
+}
+.mr-8 {
+  margin-right: 32px;
+}
+.mr-10 {
+  margin-right: 40px;
+}
+.mr-12 {
+  margin-right: 48px;
+}
+.mr-16 {
+  margin-right: 64px;
+}
+
+// margin-bottom
+.mb-0 {
+  margin-bottom: 0;
+}
+.mb-1 {
+  margin-bottom: 4px;
+}
+.mb-2 {
+  margin-bottom: 8px;
+}
+.mb-3 {
+  margin-bottom: 12px;
+}
+.mb-4 {
+  margin-bottom: 16px;
+}
+.mb-5 {
+  margin-bottom: 20px;
+}
+.mb-6 {
+  margin-bottom: 24px;
+}
+.mb-8 {
+  margin-bottom: 32px;
+}
+.mb-10 {
+  margin-bottom: 40px;
+}
+.mb-12 {
+  margin-bottom: 48px;
+}
+.mb-16 {
+  margin-bottom: 64px;
+}
+
+// margin-left
+.ml-0 {
+  margin-left: 0;
+}
+.ml-1 {
+  margin-left: 4px;
+}
+.ml-2 {
+  margin-left: 8px;
+}
+.ml-3 {
+  margin-left: 12px;
+}
+.ml-4 {
+  margin-left: 16px;
+}
+.ml-5 {
+  margin-left: 20px;
+}
+.ml-6 {
+  margin-left: 24px;
+}
+.ml-8 {
+  margin-left: 32px;
+}
+.ml-10 {
+  margin-left: 40px;
+}
+.ml-12 {
+  margin-left: 48px;
+}
+.ml-16 {
+  margin-left: 64px;
+}
+
+// margin-x (left & right)
+.mx-0 {
+  margin-left: 0;
+  margin-right: 0;
+}
+.mx-1 {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+.mx-2 {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+.mx-3 {
+  margin-left: 12px;
+  margin-right: 12px;
+}
+.mx-4 {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+.mx-5 {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.mx-6 {
+  margin-left: 24px;
+  margin-right: 24px;
+}
+.mx-8 {
+  margin-left: 32px;
+  margin-right: 32px;
+}
+.mx-10 {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+.mx-12 {
+  margin-left: 48px;
+  margin-right: 48px;
+}
+.mx-16 {
+  margin-left: 64px;
+  margin-right: 64px;
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// margin-y (top & bottom)
+.my-0 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.my-1 {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.my-2 {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.my-3 {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.my-4 {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+.my-5 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.my-6 {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+.my-8 {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+.my-10 {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.my-12 {
+  margin-top: 48px;
+  margin-bottom: 48px;
+}
+.my-16 {
+  margin-top: 64px;
+  margin-bottom: 64px;
+}
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+// 间距工具类 - Padding
+// padding - all sides
+.p-0 {
+  padding: 0;
+}
+.p-1 {
+  padding: 4px;
+}
+.p-2 {
+  padding: 8px;
+}
+.p-3 {
+  padding: 12px;
+}
+.p-4 {
+  padding: 16px;
+}
+.p-5 {
+  padding: 20px;
+}
+.p-6 {
+  padding: 24px;
+}
+.p-8 {
+  padding: 32px;
+}
+.p-10 {
+  padding: 40px;
+}
+.p-12 {
+  padding: 48px;
+}
+.p-16 {
+  padding: 64px;
+}
+
+// padding-top
+.pt-0 {
+  padding-top: 0;
+}
+.pt-1 {
+  padding-top: 4px;
+}
+.pt-2 {
+  padding-top: 8px;
+}
+.pt-3 {
+  padding-top: 12px;
+}
+.pt-4 {
+  padding-top: 16px;
+}
+.pt-5 {
+  padding-top: 20px;
+}
+.pt-6 {
+  padding-top: 24px;
+}
+.pt-8 {
+  padding-top: 32px;
+}
+.pt-10 {
+  padding-top: 40px;
+}
+.pt-12 {
+  padding-top: 48px;
+}
+.pt-16 {
+  padding-top: 64px;
+}
+
+// padding-right
+.pr-0 {
+  padding-right: 0;
+}
+.pr-1 {
+  padding-right: 4px;
+}
+.pr-2 {
+  padding-right: 8px;
+}
+.pr-3 {
+  padding-right: 12px;
+}
+.pr-4 {
+  padding-right: 16px;
+}
+.pr-5 {
+  padding-right: 20px;
+}
+.pr-6 {
+  padding-right: 24px;
+}
+.pr-8 {
+  padding-right: 32px;
+}
+.pr-10 {
+  padding-right: 40px;
+}
+.pr-12 {
+  padding-right: 48px;
+}
+.pr-16 {
+  padding-right: 64px;
+}
+
+// padding-bottom
+.pb-0 {
+  padding-bottom: 0;
+}
+.pb-1 {
+  padding-bottom: 4px;
+}
+.pb-2 {
+  padding-bottom: 8px;
+}
+.pb-3 {
+  padding-bottom: 12px;
+}
+.pb-4 {
+  padding-bottom: 16px;
+}
+.pb-5 {
+  padding-bottom: 20px;
+}
+.pb-6 {
+  padding-bottom: 24px;
+}
+.pb-8 {
+  padding-bottom: 32px;
+}
+.pb-10 {
+  padding-bottom: 40px;
+}
+.pb-12 {
+  padding-bottom: 48px;
+}
+.pb-16 {
+  padding-bottom: 64px;
+}
+
+// padding-left
+.pl-0 {
+  padding-left: 0;
+}
+.pl-1 {
+  padding-left: 4px;
+}
+.pl-2 {
+  padding-left: 8px;
+}
+.pl-3 {
+  padding-left: 12px;
+}
+.pl-4 {
+  padding-left: 16px;
+}
+.pl-5 {
+  padding-left: 20px;
+}
+.pl-6 {
+  padding-left: 24px;
+}
+.pl-8 {
+  padding-left: 32px;
+}
+.pl-10 {
+  padding-left: 40px;
+}
+.pl-12 {
+  padding-left: 48px;
+}
+.pl-16 {
+  padding-left: 64px;
+}
+
+// padding-x (left & right)
+.px-0 {
+  padding-left: 0;
+  padding-right: 0;
+}
+.px-1 {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.px-2 {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.px-3 {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.px-4 {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.px-5 {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.px-6 {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.px-8 {
+  padding-left: 32px;
+  padding-right: 32px;
+}
+.px-10 {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+.px-12 {
+  padding-left: 48px;
+  padding-right: 48px;
+}
+.px-16 {
+  padding-left: 64px;
+  padding-right: 64px;
+}
+
+// padding-y (top & bottom)
+.py-0 {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.py-1 {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.py-2 {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.py-3 {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+.py-4 {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.py-5 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.py-6 {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+.py-8 {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+.py-10 {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+.py-12 {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+.py-16 {
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
